@@ -1,117 +1,166 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ page session="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ page session="false"%>
 <html>
 <head>
-	<title>Employee Page</title>
-	<style type="text/css">
-		.tg  {border-collapse:collapse;border-spacing:0;border-color:#ccc;}
-		.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;}
-		.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#f0f0f0;}
-		.tg .tg-4eph{background-color:#f9f9f9}
-	</style>
-	<link rel="stylesheet" href="../resources/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="../resources/dist/css/AdminLTE.min.css">
-	
-	
+<title>Employee Page</title>
+<style type="text/css">
+.tg {
+	border-collapse: collapse;
+	border-spacing: 0;
+	border-color: #ccc;
+}
+
+.tg td {
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	padding: 10px 5px;
+	border-style: solid;
+	border-width: 1px;
+	overflow: hidden;
+	word-break: normal;
+	border-color: #ccc;
+	color: #333;
+	background-color: #fff;
+}
+
+.tg th {
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	padding: 10px 5px;
+	border-style: solid;
+	border-width: 1px;
+	overflow: hidden;
+	word-break: normal;
+	border-color: #ccc;
+	color: #333;
+	background-color: #f0f0f0;
+}
+
+.tg .tg-4eph {
+	background-color: #f9f9f9
+}
+</style>
+<link href="../resources/css/custom.css" rel="stylesheet">
+<link href="../resources/css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom styling plus plugins -->
+<link href="../resources/css/custom.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="../resources/css/maps/jquery-jvectormap-2.0.1.css" />
+<link href="../resources/css/icheck/flat/green.css" rel="stylesheet" />
+<link href="../resources/css/floatexamples.css" rel="stylesheet"
+	type="text/css" />
+
+<script src="../resources/js/jquery.min.js"></script>
+    <script src="../resources/js/nprogress.js"></script>
+    
 </head>
 <body class="hold-transition register-page">
-<!-- <h1>
+	<!-- <h1>
 	Add an Employee
 </h1>
  -->
-<c:url var="addAction" value="/employee/add" ></c:url>
+	<c:url var="addAction" value="/employee/add"></c:url>
 
-<section class="content">
-	<div class = "row">
-	<div class= "col-md-2"></div>
-		<div class = "col-md-8">
-		<div class="box box-primary">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Add an Employee</h3>
-                </div><!-- /.box-header -->
-                <!-- form start -->
-                <form:form action="${addAction}" commandName="employee">
-                  <div class="box-body">
-                    
-                    <div class="form-group">
-                      <form:label for="firstName" path="firstName">First Name</form:label>
-                      <form:input path="firstName" type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name"/>
-                    </div>
-                    
-                    <div class="form-group">
-                      <form:label path = "lastName" for="lastName">Last Name</form:label>
-                      <form:input path="lastName" type="text" class="form-control" id="firstName" name="lastName" placeholder="Last Name"/>
-                    </div>
-                    
-                    <div class="form-group">
-                      <form:label path = "email" for="email">Email Address</form:label>
-                      <form:input path = "email" type="email" class="form-control" id="email" name="email" placeholder="Enter email"/>
-                    </div>
-                    
-                    <div class="form-group">
-                      <form:label path = "username" for="username">Username</form:label>
-                      <form:input path = "username" type="username" class="form-control" id="username" name="username" placeholder="Enter Username"/>
-                    </div>
-                    
-                    <div class="form-group">
-                      <form:label path = "password" for="exampleInputPassword1">Password</form:label>
-                      <form:input path = "password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"/>
-                    </div>
-                    
-                    <div class="form-group">
-                      <form:label path = "salary" for="salary">Salary</form:label>
-                      <form:input path = "salary" type="text" class="form-control" id="salary" name="salary" placeholder="Salary"/>
-                    </div>
-                    
-                    <div class="form-group">
-                      <form:label path = "joinDate" for="joinDate">Join Date</form:label>
-                      <form:input path = "joinDate" type="text" class="form-control" id="joinDate" name="joinDate" placeholder="Join Date"/>
-                    </div>
-                    
-                    <div class="form-group">
-                      <form:label path = "street" for="street">Street</form:label>
-                      <form:input path = "street" type="text" class="form-control" id="street" name="street" placeholder="Street"/>
-                    </div>
-                    
-                    <div class="form-group">
-                      <form:label path = "city" for="city">City</form:label>
-                      <form:input path = "city" type="text" class="form-control" id="city" name="city" placeholder="City"/>
-                    </div>
-                    
-                    <div class="form-group">
-                      <form:label path = "state" for="state">State</form:label>
-                      <form:input path = "state" type="text" class="form-control" id="state" name="state" placeholder="State"/>
-                    </div>
-                    
-                    <div class="form-group">
-                      <form:label path = "zip" for="zip">Zip</form:label>
-                      <form:input path = "zip" type="text" class="form-control" id="zip" name="zip" placeholder="Zip"/>
-                    </div>
-                    
-                    <div class="form-group">
-                      <form:label path = "telephone" for="telephone">Telephone</form:label>
-                      <form:input path = "telephone" type="text" class="form-control" id="telephone" name="telephone" placeholder="Telephone"/>
-                    </div>
-                    
-                    
-                  </div><!-- /.box-body -->
+	<div class="x_panel">
+		<div class="x_title">
+			<h2>
+				Add an Employee <small>Click to add</small>
+			</h2>
+			<div class="clearfix"></div>
+		</div>
+		<div class="x_content">
 
-                  <div class="box-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                  </div>
-                </form:form>
-              </div>
+			<!-- start form for validation -->
+			<form:form action="${addAction}" commandName="employee"
+				id="demo-form" data-parsley-validate="" novalidate="">
+				<div class="form-group">
+					<form:label for="firstName" path="firstName">First Name *</form:label>
+					<form:input type="text" path="firstName" class="form-control"
+					name="firstName" required="required"/>	
+				</div>
+
+				<div class="form-group">
+					<form:label path="lastName" for="lastName">Last Name *</form:label>
+					<form:input path="lastName" type="text" class="form-control"
+						id="firstName" required="required" name="lastName"/>
+				</div>
+
+				<div class="form-group">
+					<form:label path="email" for="email">Email Address *</form:label>
+					<form:input path="email" type="email" class="form-control"
+						id="email" data-validate-linked="email" required="required" name="email"/>
+				</div>
+
+				<div class="form-group">
+					<form:label path="username" for="username">Username *</form:label>
+					<form:input path="username" type="username" class="form-control"
+						id="username" name="username" required="required"/>
+				</div>
+
+				<div class="form-group">
+					<form:label path="password" for="exampleInputPassword1">Password *</form:label>
+					<form:input path="password" type="password" class="form-control"
+						id="password" required="required" data-validate-length="6,8"/>
+				</div>
+
+				<div class="form-group">
+					<form:label path="salary" for="salary">Salary *</form:label>
+					<form:input path="salary" type="text" class="form-control"
+						id="salary" name="salary" required="required"/>
+				</div>
+				
+				<div class="form-group">
+					<form:label path="joinDate" for="joinDate">Join Date *</form:label>
+					<form:input path="joinDate" type="text" class="form-control"
+						id="joinDate" name="joinDate" required="required" aria-describedby="inputSuccess2Status"/>
+						<span id="inputSuccess2Status" class="sr-only">(success)</span>
+				</div>
+
+				<div class="form-group">
+					<form:label path="street" for="street">Street *</form:label>
+					<form:input path="street" type="text" class="form-control"
+						id="street" name="street" required="required"/>
+				</div>
+
+				<div class="form-group">
+					<form:label path="city" for="city">City *</form:label>
+					<form:input path="city" type="text" class="form-control" id="city"
+						name="city" required="required"/>
+				</div>
+
+				<div class="form-group">
+					<form:label path="state" for="state">State *</form:label>
+					<form:input path="state" type="text" class="form-control"
+						id="state" required="required" name="state"/>
+				</div>
+
+				<div class="form-group">
+					<form:label path="zip" for="zip">Zip *</form:label>
+					<form:input path="zip" type="text" class="form-control" id="zip"
+						name="zip" required="required"/>
+				</div>
+
+				<div class="form-group">
+					<form:label path="telephone" for="telephone">Telephone *</form:label>
+					<form:input path="telephone" type="text" data-inputmask="'mask' : '(999) 999-9999'" class="form-control"
+						id="telephone" required="required" name="telephone"/>
+				</div>
+
+				<button type="submit" class="btn btn-success">Submit</button>
+
+				</p>
+			</form:form>
+			<!-- end form for validations -->
+
 		</div>
 	</div>
-</section>
 
 
 
-
-
-<%-- 
+	<%-- 
 <div class ="box box-primary">
 	<form:form action="${addAction}" commandName="employee">
 <table>
@@ -226,6 +275,5 @@
 </table>	
 </form:form>
 </div> --%>
-
-</body>
+	</ body>
 </html>
