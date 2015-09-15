@@ -8,11 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Entity bean with JPA annotations
- * Hibernate provides JPA implementation
- * @author pankaj, Payman Salek
- * @since 1.0
- *
+ * @author bgsudeep
  */
 @Entity
 @Table(name="EMPLOYEE")
@@ -46,7 +42,19 @@ public class Employee {
 	
 	@Column(name="zip")
 	private String zip;
-	
+
+	@Column(name="salary")
+	private String salary;
+
+	@Column(name="username")
+	private String username;
+
+	@Column(name="password")
+	private String password;
+
+	@Column(name="joinDate")
+	private String joinDate;
+
 	public int getId() {
 		return id;
 	}
@@ -117,6 +125,39 @@ public class Employee {
 
 	public void setZip(String zip) {
 		this.zip = zip;
+	}
+	
+
+	public String getSalary() {
+		return salary;
+	}
+
+	public void setSalary(String salary) {
+		this.salary = salary;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	public String getJoinDate() {
+		return joinDate;
+	}
+
+	public void setJoinDate(String joinDate) {
+		this.joinDate = joinDate;
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,20 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService employeeService;
 	
+	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+	public String getDashboard(Model model) {
+		LOGGER.debug("Processing request for /dashboard");
+		
+		return "dashboard";
+	}
+	
+	@RequestMapping(value = "/addpage", method = RequestMethod.GET)
+	public String addpage(Model model) {
+		LOGGER.debug("Processing request for /dashboard");
+		
+		return "sample";
+	}
+	
 	@RequestMapping(value = "/employees", method = RequestMethod.GET)
 	public String listEmployees(Model model) {
 		LOGGER.debug("Processing request for /employees");
@@ -28,6 +43,13 @@ public class EmployeeController {
 		model.addAttribute("employee", new Employee());
 		model.addAttribute("listEmployees", this.employeeService.listEmployee());
 		return "employee";
+	}
+	
+	@RequestMapping(value="/employee/add", method=RequestMethod.GET)
+	public String addEmp(Model model) {
+		LOGGER.debug("Processing request for /employee/add GET");
+		model.addAttribute("employee", new Employee());
+		return "addemployee";
 	}
 	
 	//For add and update person both
@@ -67,8 +89,8 @@ public class EmployeeController {
 		LOGGER.debug("Processing request for /employee/edit");
 
 		model.addAttribute("employee", this.employeeService.getEmployeeById(id));
-        model.addAttribute("listPersons", this.employeeService.listEmployee());
-        return "employee";
+//        model.addAttribute("listPersons", this.employeeService.listEmployee());
+        return "addemployee";
     }
 	
 }

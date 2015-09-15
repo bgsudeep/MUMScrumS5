@@ -6,6 +6,7 @@
 
 	<persistence-unit name="application" transaction-type="RESOURCE_LOCAL">
         <class>edu.mum.mumscrum.s5.entity.Employee</class>
+        <class>edu.mum.mumscrum.s5.entity.User</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 	</persistence-unit>
 
