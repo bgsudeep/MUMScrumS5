@@ -8,6 +8,11 @@
         <class>edu.mum.mumscrum.s5.entity.Employee</class>
         <class>edu.mum.mumscrum.s5.entity.User</class>
         <class>edu.mum.mumscrum.s5.entity.Role</class>
+        <class>edu.mum.mumscrum.s5.entity.UserStory</class>
+        <class>edu.mum.mumscrum.s5.entity.ProductBacklog</class>
+        <class>edu.mum.mumscrum.s5.entity.Release</class>
+        <class>edu.mum.mumscrum.s5.entity.Sprint</class>
+        <class>edu.mum.mumscrum.s5.entity.Burndown</class>
         
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 	</persistence-unit>
