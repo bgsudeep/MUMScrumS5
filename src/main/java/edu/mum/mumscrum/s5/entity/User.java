@@ -1,6 +1,9 @@
 package edu.mum.mumscrum.s5.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -49,12 +53,12 @@ public class User implements Serializable {
 	@Cascade({org.hibernate.annotations.CascadeType.ALL})
 	private Employee employee;
 	
-	@OneToOne
+	@ManyToMany
 	@JoinTable(name="user_role", joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
 			inverseJoinColumns={@JoinColumn(name="role_id", referencedColumnName="id")})
 	@Cascade({ org.hibernate.annotations.CascadeType.MERGE,
 		org.hibernate.annotations.CascadeType.SAVE_UPDATE })
-	private Role role;
+	private List<Role> roles = new ArrayList<Role>();
 	
 	public int getId() {
 		return id;
@@ -95,13 +99,18 @@ public class User implements Serializable {
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
-	public Role getRole() {
-		return role;
-	}
-	public void setRole(Role role) {
-		this.role = role;
+	
+	public List<Role> getRoles() {
+		return roles;
 	}
 	
+	public void addRole(Role role) {
+		this.roles.add(role);
+	}
+	
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

@@ -25,6 +25,5 @@ public class LoginController {
 //		
 //		boolean validUser = this.loginService.login(user);
 //		
-//	}
-	
+//	}	
 }

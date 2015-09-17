@@ -78,7 +78,6 @@
 						<th style="width: 10px">ID</th>
 						<th style="width: 5px">First Name</th>
 						<th style="width: 5px">Last Name</th>
-						<th style="width: 5px">Username</th>
 						<th style="width: 5px">Email</th>
 						<th style="width: 5px">Salary</th>
 						<th style="width: 5px">Street</th>
@@ -95,7 +94,6 @@
 							<td>${employee.id}</td>
 							<td>${employee.firstName}</td>
 							<td>${employee.lastName}</td>
-							<td>${employee.username}</td>
 							<td>${employee.email}</td>
 							<td>${employee.salary}</td>
 							<td>${employee.street}</td>

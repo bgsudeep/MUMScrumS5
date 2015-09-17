@@ -1,5 +1,9 @@
 package edu.mum.mumscrum.s5.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
@@ -23,11 +27,11 @@ public class Role {
 	@Column
 	private String role;
 	
-	@OneToOne
+	@ManyToMany
 	@JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "role_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") })
 	@Cascade({ org.hibernate.annotations.CascadeType.MERGE,
 			org.hibernate.annotations.CascadeType.SAVE_UPDATE })
-	User user;
+	private List<User> userRoles = new ArrayList<User>();
 
 	public int getId() {
 		return id;
@@ -45,14 +49,11 @@ public class Role {
 		this.role = role;
 	}
 
-	public User getUser() {
-		return user;
+	public List<User> getUserRoles() {
+		return userRoles;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserRoles(List<User> userRoles) {
+		this.userRoles = userRoles;
 	}
-
-	
-
 }

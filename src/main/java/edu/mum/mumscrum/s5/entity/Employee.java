@@ -5,7 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
 
 /**
  * @author bgsudeep
@@ -46,11 +51,10 @@ public class Employee {
 	@Column(name="salary")
 	private String salary;
 
-	@Column(name="username")
-	private String username;
-
-	@Column(name="password")
-	private String password;
+	@OneToOne
+	@JoinTable(name = "employee_user", joinColumns = { @JoinColumn(name = "employee_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") })
+	@Cascade({ org.hibernate.annotations.CascadeType.ALL })
+	private User user;
 
 	@Column(name="joinDate")
 	private String joinDate;
@@ -135,22 +139,6 @@ public class Employee {
 	public void setSalary(String salary) {
 		this.salary = salary;
 	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
 	
 	public String getJoinDate() {
 		return joinDate;
@@ -158,6 +146,16 @@ public class Employee {
 
 	public void setJoinDate(String joinDate) {
 		this.joinDate = joinDate;
+	}
+	
+	
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override
