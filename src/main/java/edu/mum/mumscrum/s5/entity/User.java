@@ -1,14 +1,26 @@
 package edu.mum.mumscrum.s5.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.Cascade;
 
 /**
  * Entity implementation class for Entity: User
  *
  */
 @Entity 
-@Table(name="User")
+@Table(name="user")
 
 public class User implements Serializable {
 	
@@ -25,8 +37,24 @@ public class User implements Serializable {
 	@Column(name="password")
 	private String password;
 	
-	@Column(name="roleID")
-	private int roleID;
+	@Column(name="enabled")
+	private boolean enabled;
+	
+	@Transient
+	private String roleID;
+	
+	@OneToOne
+	@JoinTable(name="employee_user", joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
+		inverseJoinColumns={@JoinColumn(name="employee_id", referencedColumnName="id")})
+	@Cascade({org.hibernate.annotations.CascadeType.ALL})
+	private Employee employee;
+	
+	@OneToOne
+	@JoinTable(name="user_role", joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
+			inverseJoinColumns={@JoinColumn(name="role_id", referencedColumnName="id")})
+	@Cascade({ org.hibernate.annotations.CascadeType.MERGE,
+		org.hibernate.annotations.CascadeType.SAVE_UPDATE })
+	private Role role;
 	
 	public int getId() {
 		return id;
@@ -46,12 +74,34 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public int getRoleID() {
+	
+	public String getRoleID() {
 		return roleID;
 	}
-	public void setRoleID(int roleID) {
+	public void setRoleID(String roleID) {
 		this.roleID = roleID;
 	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+	
+	public Employee getEmployee() {
+		return employee;
+	}
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
+	}
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
