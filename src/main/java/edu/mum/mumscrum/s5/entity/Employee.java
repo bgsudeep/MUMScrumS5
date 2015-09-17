@@ -148,8 +148,6 @@ public class Employee {
 		this.joinDate = joinDate;
 	}
 	
-	
-
 	public User getUser() {
 		return user;
 	}

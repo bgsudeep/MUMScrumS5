@@ -21,7 +21,7 @@ import org.hibernate.annotations.Cascade;
 @Table(name = "release_backlog")
 public class Release {
 
-	private Long id;
+	private int id;
 	private String name;
 	private String description;
 	// private String srumMaster;
@@ -69,11 +69,11 @@ public class Release {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

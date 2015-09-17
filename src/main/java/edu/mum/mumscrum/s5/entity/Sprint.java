@@ -21,7 +21,7 @@ import org.hibernate.annotations.CascadeType;
 @Table(name = "sprint")
 public class Sprint {
 	
-	private Long id;
+	private int id;
 
 	private String title;
 
@@ -51,7 +51,7 @@ public class Sprint {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -74,7 +74,7 @@ public class Sprint {
 		return description;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 
 		this.id = id;
 	}

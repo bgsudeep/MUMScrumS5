@@ -17,7 +17,7 @@ public class UserStory {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private int id;
 
 	@Column
 	private String title;
@@ -58,11 +58,11 @@ public class UserStory {
 	@JoinColumn(name = "sprint_id", nullable = true)
 	private Sprint sprint;
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

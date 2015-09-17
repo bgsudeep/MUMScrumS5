@@ -19,7 +19,7 @@ import org.hibernate.annotations.CascadeType;
 @Table(name = "product_backlog")
 public class ProductBacklog {
 	
-	private Long id;
+	private int id;
 
 	private String title;
 
@@ -31,7 +31,7 @@ public class ProductBacklog {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -59,7 +59,7 @@ public class ProductBacklog {
 		return description;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
