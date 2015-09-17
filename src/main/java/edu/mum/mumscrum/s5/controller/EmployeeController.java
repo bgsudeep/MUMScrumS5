@@ -30,7 +30,8 @@ public class EmployeeController {
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public String getDashboard(Model model) {
 		LOGGER.debug("Processing request for /dashboard");
-		
+		model.addAttribute("page", "main");
+
 		return "dashboard";
 	}
 	
@@ -47,7 +48,8 @@ public class EmployeeController {
 		
 		model.addAttribute("employee", new Employee());
 		model.addAttribute("listEmployees", this.employeeService.listEmployee());
-		return "employee";
+		model.addAttribute("page", "employee");
+		return "dashboard";
 	}
 	
 	@RequestMapping(value="/employee/add", method=RequestMethod.GET)
@@ -60,7 +62,8 @@ public class EmployeeController {
 		}
 		
 		model.addAttribute("roles", roleService.getRoles());
-		return "addemployee";
+		model.addAttribute("page", "addemployee");
+		return "dashboard";
 	}
 	
 	//For add and update person both
@@ -68,13 +71,14 @@ public class EmployeeController {
 	public String addEmployee(@ModelAttribute("employee") Employee e){
 		LOGGER.debug("Processing request for /employee/add");
 		
-		String roleID = e.getUser().getRoleID();
-		Role role = roleService.getRoleById(Integer.valueOf(roleID));
 		
-		e.getUser().addRole(role);
 		
 		if(e.getId() == 0){
 			//new employee, add it
+			String roleID = e.getUser().getRoleID();
+			Role role = roleService.getRoleById(Integer.valueOf(roleID));
+			
+			e.getUser().addRole(role);
 			this.employeeService.addEmployee(e);
 		}else{
 			//existing employee, call update
@@ -85,7 +89,7 @@ public class EmployeeController {
 		
 	}
 	
-	@RequestMapping("/remove/{id}")
+	@RequestMapping("/employee/remove/{id}")
     public String removeEmployee(@PathVariable("id") int id){
 		LOGGER.debug("Processing request for /employee/remove");
 
@@ -100,13 +104,14 @@ public class EmployeeController {
         return "redirect:/employees";
     }
  
-    @RequestMapping("/edit/{id}")
+    @RequestMapping("/employee/edit/{id}")
     public String editEmployee(@PathVariable("id") int id, Model model){
 		LOGGER.debug("Processing request for /employee/edit");
 
 		model.addAttribute("employee", this.employeeService.getEmployeeById(id));
+		model.addAttribute("page", "addemployee");
 //        model.addAttribute("listPersons", this.employeeService.listEmployee());
-        return "addemployee";
+        return "dashboard";
     }
     
     public EmployeeService getEmployeeService() {

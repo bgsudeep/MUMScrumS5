@@ -64,13 +64,14 @@
 	<div class="x_panel">
 		<div class="x_title">
 			<h2>Add Product Backlog</h2>
-			
+
 			<div class="clearfix"></div>
 		</div>
 		<div class="x_content">
 			<br>
-			<form:form action="productbacklog/add" id="demo-form2" data-parsley-validate=""
-				class="form-horizontal form-label-left" novalidate="" commandName="productbacklog">
+			<form:form action="productbacklog/add" id="demo-form2"
+				data-parsley-validate="" class="form-horizontal form-label-left"
+				novalidate="" commandName="productbacklog">
 				<%-- Value = ${productbacklog } --%>
 				<div class="form-group">
 					<c:if test="${!empty productbacklog.title}">
@@ -99,7 +100,9 @@
 
 				<div class="ln_solid"></div>
 				<div class="form-group">
-					<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+					<div class="col-sm-6 col-xs-12">
+
+
 						<button type="submit" class="btn btn-success">Add</button>
 					</div>
 				</div>
@@ -121,24 +124,28 @@
 		<div class="x_content">
 
 			<table class="table table-striped">
-				<tbody>
+				<thead>
 					<tr>
-						<th style="width: 10px">S.N.</th>
-						<th style="width: 5px">Title</th>
-						<th style="width: 5px">Description</th>
-						<th style="width: 5px">Action</th>
+						<th>S.N.</th>
+						<th>Title</th>
+						<th>Description</th>
+						<th>Action</th>
 					</tr>
+				</thead>
+				<tbody>
 					<c:forEach items="${productBacklogList}" var="productbacklog">
 						<tr>
 							<td>${productbacklog.id}</td>
 							<td>${productbacklog.title}</td>
 							<td>${productbacklog.description}</td>
-							<td><a href="<c:url value='/edit/${productbacklog.id}' />">Edit</a></td>
-							<td><a href="<c:url value='/remove/${productbacklog.id}' />">Delete</a></td>
+							<td><a href="<c:url value='/edit/${productbacklog.id}' />">Edit</a>/<a
+								href="<c:url value='/remove/${productbacklog.id}' />">Delete</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
+
+
 
 		</div>
 	</div>

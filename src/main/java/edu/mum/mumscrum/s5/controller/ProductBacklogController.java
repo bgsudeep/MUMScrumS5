@@ -27,9 +27,9 @@ public class ProductBacklogController {
 	public String listProductBacklogs(Model model) {
 		LOGGER.debug("Processing request for /productbacklog");
 		model.addAttribute("productbacklog", new ProductBacklog());
-		
+		model.addAttribute("page", "productbacklog");
 		model.addAttribute("productBacklogList", this.productBacklogService.listProductBacklog());
-		return "/productbacklog";
+		return "dashboard";
 	}
 	
 	@RequestMapping(value= "/productbacklog/add", method = RequestMethod.POST)

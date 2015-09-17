@@ -102,8 +102,8 @@
 							<td>${employee.zip}</td>
 							<td>${employee.joinDate}</td>
 							<td>${employee.telephone}</td>
-							<td><a href="<c:url value='/edit/${employee.id}' />">Edit</a></td>
-							<td><a href="<c:url value='/remove/${employee.id}' />">Delete</a></td>
+							<td><a href="<c:url value='/employee/edit/${employee.id}' />">Edit</a></td>
+							<td><a href="<c:url value='/employee/remove/${employee.id}' />">Delete</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

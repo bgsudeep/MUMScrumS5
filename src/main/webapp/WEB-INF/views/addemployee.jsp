@@ -43,18 +43,20 @@
 	background-color: #f9f9f9
 }
 </style>
-<link href="../resources/css/custom.css" rel="stylesheet">
-<link href="../resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="/MUMScrumS5/resources/css/custom.css" rel="stylesheet">
+<link href="/MUMScrumS5/resources/css/bootstrap.min.css"
+	rel="stylesheet">
 <!-- Custom styling plus plugins -->
-<link href="../resources/css/custom.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css"
-	href="../resources/css/maps/jquery-jvectormap-2.0.1.css" />
-<link href="../resources/css/icheck/flat/green.css" rel="stylesheet" />
-<link href="../resources/css/floatexamples.css" rel="stylesheet"
-	type="text/css" />
+<link href="/MUMScrumS5/resources/css/custom.css" rel="stylesheet">
+<link rel="/stylesheet" type="text/css"
+	href="/MUMScrumS5/resources/css/maps/jquery-jvectormap-2.0.1.css" />
+<link href="/MUMScrumS5/resources/css/icheck/flat/green.css"
+	rel="stylesheet" />
+<link href="/MUMScrumS5/resources/css/floatexamples.css"
+	rel="stylesheet" type="text/css" />
 
-<script src="../resources/js/jquery.min.js"></script>
-<script src="../resources/js/nprogress.js"></script>
+<script src="/MUMScrumS5/resources/js/jquery.min.js"></script>
+<script src="/MUMScrumS5/resources/js/nprogress.js"></script>
 
 </head>
 <body class="hold-transition register-page">
@@ -165,15 +167,21 @@
 						id="telephone" required="required" name="telephone" />
 				</div>
 
-				<div class="">
-					<label class="control-label" for="role">Select Role:</label> <br>
-					<c:forEach items="${roles}" var="role" varStatus="loopCounter">
+				<c:if test="${empty employee.firstName}">
 
-						<form:radiobutton path="user.roleID" value="${role.id}" /> ${role.role}
+					<div class="">
+						<label class="control-label" for="role">Select Role:</label> <br>
+						<c:forEach items="${roles}" var="role" varStatus="loopCounter">
+
+							<form:radiobutton path="user.roleID" value="${role.id}" /> ${role.role}
 				<br>
-					</c:forEach>
-					<br>
-				</div>
+						</c:forEach>
+						<br>
+					</div>
+
+				</c:if>
+
+
 
 				<form:input path="id" type="hidden" />
 				<form:input path="user.enabled" type="hidden" value="true" />
