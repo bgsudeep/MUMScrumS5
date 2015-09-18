@@ -39,9 +39,9 @@
 
 <script src="<%=request.getContextPath()%>/resources/js/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/resources/js/nprogress.js"></script>
-<script>
+<!-- <script>
         NProgress.start();
-    </script>
+    </script> -->
 
 <!--[if lt IE 9]>
         <script src="../assets/js/ie8-responsive-file-warning.js"></script>
@@ -132,7 +132,7 @@
 							<span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
 						</a> <a data-toggle="tooltip" data-placement="top" title="Lock"> <span
 							class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-						</a> <a data-toggle="tooltip" data-placement="top" title="Logout">
+						</a> <a href="<c:url value='/logout' />" data-toggle="tooltip" data-placement="top" title="Logout">
 							<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
 						</a>
 					</div>

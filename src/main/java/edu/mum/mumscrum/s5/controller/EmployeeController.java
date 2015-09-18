@@ -3,8 +3,10 @@ package edu.mum.mumscrum.s5.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -78,7 +80,13 @@ public class EmployeeController {
 			String roleID = e.getUser().getRoleID();
 			Role role = roleService.getRoleById(Integer.valueOf(roleID));
 			
+//			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//			String encodedPassword = encoder.encode(e.getUser().getPassword());
+//			
+//			e.getUser().setPassword(encodedPassword);
+			
 			e.getUser().addRole(role);
+			
 			this.employeeService.addEmployee(e);
 		}else{
 			//existing employee, call update
