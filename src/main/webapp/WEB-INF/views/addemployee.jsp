@@ -43,20 +43,6 @@
 	background-color: #f9f9f9
 }
 </style>
-<link href="/MUMScrumS5/resources/css/custom.css" rel="stylesheet">
-<link href="/MUMScrumS5/resources/css/bootstrap.min.css"
-	rel="stylesheet">
-<!-- Custom styling plus plugins -->
-<link href="/MUMScrumS5/resources/css/custom.css" rel="stylesheet">
-<link rel="/stylesheet" type="text/css"
-	href="/MUMScrumS5/resources/css/maps/jquery-jvectormap-2.0.1.css" />
-<link href="/MUMScrumS5/resources/css/icheck/flat/green.css"
-	rel="stylesheet" />
-<link href="/MUMScrumS5/resources/css/floatexamples.css"
-	rel="stylesheet" type="text/css" />
-
-<script src="/MUMScrumS5/resources/js/jquery.min.js"></script>
-<script src="/MUMScrumS5/resources/js/nprogress.js"></script>
 
 </head>
 <body class="hold-transition register-page">
@@ -69,7 +55,7 @@
 	<div class="x_panel">
 		<div class="x_title">
 			<h2>
-				Add an Employee <small>Click to add</small>
+				Add an Employee
 			</h2>
 			<div class="clearfix"></div>
 		</div>

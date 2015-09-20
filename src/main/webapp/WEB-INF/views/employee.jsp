@@ -43,17 +43,7 @@
 	background-color: #f9f9f9
 }
 </style>
-<link href="../MUMScrumS5/resources/css/custom.css" rel="stylesheet">
-<link href="../MUMScrumS5/resources/css/bootstrap.min.css"
-	rel="stylesheet">
-<!-- Custom styling plus plugins -->
-<link href="../MUMScrumS5/resources/css/custom.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css"
-	href="../MUMScrumS5/resources/css/maps/jquery-jvectormap-2.0.1.css" />
-<link href="../MUMScrumS5/resources/css/icheck/flat/green.css"
-	rel="stylesheet" />
-<link href="../MUMScrumS5/resources/css/floatexamples.css"
-	rel="stylesheet" type="text/css" />
+
 </head>
 <body>
 	<!-- <h1>

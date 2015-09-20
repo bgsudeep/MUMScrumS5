@@ -106,13 +106,15 @@
 										<li><a href="<c:url value='/employee/add' />">Add
 												Employees</a></li>
 									</ul></li>
-									
-									<li><a><i class="fa fa-bar-chart-o"></i> Product<span
+
+								<li><a><i class="fa fa-bar-chart-o"></i> Product<span
 										class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
-										<li><a href="<c:url value='/productbacklog' />">Product Backlog</a></li>
+										<li><a href="<c:url value='/productbacklog' />">Product
+												Backlog</a></li>
+
 									</ul></li>
-									
+
 								<li><a><i class="fa fa-bar-chart-o"></i> Charts<span
 										class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
@@ -132,8 +134,9 @@
 							<span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
 						</a> <a data-toggle="tooltip" data-placement="top" title="Lock"> <span
 							class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-						</a> <a href="<c:url value='/logout' />" data-toggle="tooltip" data-placement="top" title="Logout">
-							<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+						</a> <a href="<c:url value='/logout' />" data-toggle="tooltip"
+							data-placement="top" title="Logout"> <span
+							class="glyphicon glyphicon-off" aria-hidden="true"></span>
 						</a>
 					</div>
 					<!-- /menu footer buttons -->
@@ -157,11 +160,11 @@
 
 			<!-- page content -->
 			<div class="right_col" role="main">
-				<jsp:include page="${page}.jsp"/>
+				<jsp:include page="${page}.jsp" />
 			</div>
 
 
 		</div>
 
 	</div>
-	<jsp:include page="footer.jsp"/>
+	<jsp:include page="footer.jsp" />

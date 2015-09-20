@@ -115,8 +115,7 @@
 	<div class="x_panel">
 		<div class="x_title">
 			<h2>
-				Product Backlog List <small><a
-					href="<c:url value='/employee/add' />"></a></small>
+				Product Backlog List
 			</h2>
 
 			<div class="clearfix"></div>
@@ -136,10 +135,11 @@
 					<c:forEach items="${productBacklogList}" var="productbacklog">
 						<tr>
 							<td>${productbacklog.id}</td>
-							<td>${productbacklog.title}</td>
+							<td><a href="/MUMScrumS5/productbacklog/${productbacklog.id}/details"><c:out
+									value="${productbacklog.title}" /></a></td>
 							<td>${productbacklog.description}</td>
-							<td><a href="<c:url value='/edit/${productbacklog.id}' />">Edit</a>/<a
-								href="<c:url value='/remove/${productbacklog.id}' />">Delete</a></td>
+							<td><a href="<c:url value='productbacklog/edit/${productbacklog.id}' />">Edit</a>/<a
+								href="<c:url value='productbacklog/remove/${productbacklog.id}' />">Delete</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
