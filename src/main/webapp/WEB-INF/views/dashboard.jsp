@@ -101,16 +101,16 @@
 								<li><a><i class="fa fa-edit"></i> Employees <span
 										class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
-										<li><a href="<c:url value='/employees' />">List
+										<li><a href="<c:url value='/employee/' />">List
 												Employees</a></li>
-										<li><a href="<c:url value='/employee/add' />">Add
+										<li><a href="<c:url value='/employee/add/' />">Add
 												Employees</a></li>
 									</ul></li>
 
 								<li><a><i class="fa fa-bar-chart-o"></i> Product<span
 										class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
-										<li><a href="<c:url value='/productbacklog' />">Product
+										<li><a href="<c:url value='/productbacklog/' />">Product
 												Backlog</a></li>
 
 									</ul></li>

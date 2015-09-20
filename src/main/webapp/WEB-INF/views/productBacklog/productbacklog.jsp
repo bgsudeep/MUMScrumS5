@@ -43,17 +43,7 @@
 	background-color: #f9f9f9
 }
 </style>
-<link href="../MUMScrumS5/resources/css/custom.css" rel="stylesheet">
-<link href="../MUMScrumS5/resources/css/bootstrap.min.css"
-	rel="stylesheet">
-<!-- Custom styling plus plugins -->
-<link href="../MUMScrumS5/resources/css/custom.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css"
-	href="../MUMScrumS5/resources/css/maps/jquery-jvectormap-2.0.1.css" />
-<link href="../MUMScrumS5/resources/css/icheck/flat/green.css"
-	rel="stylesheet" />
-<link href="../MUMScrumS5/resources/css/floatexamples.css"
-	rel="stylesheet" type="text/css" />
+
 </head>
 <body>
 	<!-- <h1>
@@ -69,7 +59,7 @@
 		</div>
 		<div class="x_content">
 			<br>
-			<form:form action="productbacklog/add" id="demo-form2"
+			<form:form action="add" id="demo-form2"
 				data-parsley-validate="" class="form-horizontal form-label-left"
 				novalidate="" commandName="productbacklog">
 				<%-- Value = ${productbacklog } --%>
@@ -135,11 +125,11 @@
 					<c:forEach items="${productBacklogList}" var="productbacklog">
 						<tr>
 							<td>${productbacklog.id}</td>
-							<td><a href="/MUMScrumS5/productbacklog/${productbacklog.id}/details"><c:out
+							<td><a href="${productbacklog.id}/details"><c:out
 									value="${productbacklog.title}" /></a></td>
 							<td>${productbacklog.description}</td>
-							<td><a href="<c:url value='productbacklog/edit/${productbacklog.id}' />">Edit</a>/<a
-								href="<c:url value='productbacklog/remove/${productbacklog.id}' />">Delete</a></td>
+							<td><a href="<c:url value='edit/${productbacklog.id}' />">Edit</a>/<a
+								href="<c:url value='remove/${productbacklog.id}' />">Delete</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

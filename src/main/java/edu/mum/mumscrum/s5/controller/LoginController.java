@@ -61,7 +61,6 @@ public class LoginController {
 			map.put("username", userDetail.getUsername());
 
 		}
-
 		return "/403";
 	}
 
@@ -70,6 +69,7 @@ public class LoginController {
 
 		map.put("title", "Spring Security Login Form - Database Authentication");
 		map.put("message", "This is default page!");
+		map.put("page", "main");
 
 		return "/dashboard";
 	}

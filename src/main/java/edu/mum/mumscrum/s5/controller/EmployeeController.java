@@ -19,6 +19,7 @@ import edu.mum.mumscrum.s5.service.EmployeeService;
 import edu.mum.mumscrum.s5.service.RoleService;
 
 @Controller
+@RequestMapping("/employee")
 public class EmployeeController {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeController.class);
@@ -29,32 +30,17 @@ public class EmployeeController {
 	@Autowired
 	private RoleService roleService;
 	
-	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
-	public String getDashboard(Model model) {
-		LOGGER.debug("Processing request for /dashboard");
-		model.addAttribute("page", "main");
-
-		return "dashboard";
-	}
-	
-	@RequestMapping(value = "/addpage", method = RequestMethod.GET)
-	public String addpage(Model model) {
-		LOGGER.debug("Processing request for /dashboard");
-		
-		return "sample";
-	}
-	
-	@RequestMapping(value = "/employees", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String listEmployees(Model model) {
-		LOGGER.debug("Processing request for /employees");
+		LOGGER.debug("Processing request for /employee");
 		
 		model.addAttribute("employee", new Employee());
 		model.addAttribute("listEmployees", this.employeeService.listEmployee());
-		model.addAttribute("page", "employee");
+		model.addAttribute("page", "employee/employee");
 		return "dashboard";
 	}
 	
-	@RequestMapping(value="/employee/add", method=RequestMethod.GET)
+	@RequestMapping(value="/add", method=RequestMethod.GET)
 	public String addEmp(Model model) {
 		LOGGER.debug("Processing request for /employee/add GET");
 		model.addAttribute("employee", new Employee());
@@ -64,12 +50,12 @@ public class EmployeeController {
 		}
 		
 		model.addAttribute("roles", roleService.getRoles());
-		model.addAttribute("page", "addemployee");
+		model.addAttribute("page", "employee/addemployee");
 		return "dashboard";
 	}
 	
 	//For add and update person both
-	@RequestMapping(value= "/employee/add", method = RequestMethod.POST)
+	@RequestMapping(value= "/add", method = RequestMethod.POST)
 	public String addEmployee(@ModelAttribute("employee") Employee e){
 		LOGGER.debug("Processing request for /employee/add");
 		
@@ -97,7 +83,7 @@ public class EmployeeController {
 		
 	}
 	
-	@RequestMapping("/employee/remove/{id}")
+	@RequestMapping("/remove/{id}")
     public String removeEmployee(@PathVariable("id") int id){
 		LOGGER.debug("Processing request for /employee/remove");
 
@@ -112,12 +98,12 @@ public class EmployeeController {
         return "redirect:/employees";
     }
  
-    @RequestMapping("/employee/edit/{id}")
+    @RequestMapping("/edit/{id}")
     public String editEmployee(@PathVariable("id") int id, Model model){
 		LOGGER.debug("Processing request for /employee/edit");
 
 		model.addAttribute("employee", this.employeeService.getEmployeeById(id));
-		model.addAttribute("page", "addemployee");
+		model.addAttribute("page", "employee/addemployee");
 //        model.addAttribute("listPersons", this.employeeService.listEmployee());
         return "dashboard";
     }

@@ -20,6 +20,7 @@ import edu.mum.mumscrum.s5.service.ReleaseBacklogService;
 import edu.mum.mumscrum.s5.service.UserStoryService;
 
 @Controller
+@RequestMapping("/productbacklog")
 public class ProductBacklogController {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(ProductBacklogController.class);
@@ -33,16 +34,16 @@ public class ProductBacklogController {
 	@Autowired
 	private ReleaseBacklogService releaseBacklogService;
 	
-	@RequestMapping(value = "/productbacklog", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String listProductBacklogs(Model model) {
 		LOGGER.debug("Processing request for /productbacklog");
 		model.addAttribute("productbacklog", new ProductBacklog());
-		model.addAttribute("page", "productbacklog");
+		model.addAttribute("page", "productBacklog/productbacklog");
 		model.addAttribute("productBacklogList", this.productBacklogService.listProductBacklog());
 		return "dashboard";
 	}
 	
-	@RequestMapping(value = "/productbacklog/{productBacklogId}/details/userstory/add", method = RequestMethod.POST)
+	@RequestMapping(value = {"/{productBacklogId}/userstory/add", "/{productBacklogId}/details/userstory/add"}, method = RequestMethod.POST)
 	public String saveUserStory(@PathVariable("productBacklogId") int id,
 			@ModelAttribute("userstory") UserStory userStory,
 			BindingResult result, RedirectAttributes redir) {
@@ -61,7 +62,7 @@ public class ProductBacklogController {
 		return "redirect:/productbacklog/" + id + "/details/";
 	}
 	
-	@RequestMapping(value = "/productbacklog/{productBacklogId}/details/release/add", method = RequestMethod.POST)
+	@RequestMapping(value = {"/{productBacklogId}/release/add", "/{productBacklogId}/details/release/add"}, method = RequestMethod.POST)
 	public String saveRelease(@PathVariable("productBacklogId") int id,
 			@ModelAttribute("releasebacklog") Release releaseBacklog,
 			BindingResult result, RedirectAttributes redir) {
@@ -80,7 +81,7 @@ public class ProductBacklogController {
 		return "redirect:/productbacklog/" + id + "/details/";
 	}
 	
-	@RequestMapping("/productbacklog/{productBacklogId}/details")
+	@RequestMapping("/{productBacklogId}/details")
 	public String getProductBacklogDetails(@PathVariable int productBacklogId,
 			Model model) {
 		ProductBacklog productBacklog = productBacklogService.getProductBacklogById(productBacklogId);
@@ -96,14 +97,12 @@ public class ProductBacklogController {
 		model.addAttribute("userstory", userStory);
 		model.addAttribute("releasebacklog", releaseBacklog);
 		model.addAttribute("productbacklog", productBacklog);
-		model.addAttribute("page", "productBacklogDetails");
+		model.addAttribute("page", "productBacklog/productBacklogDetails");
 
 		return "dashboard";
 	}
 	
-	
-	
-	@RequestMapping(value= "/productbacklog/add", method = RequestMethod.POST)
+	@RequestMapping(value= "/add", method = RequestMethod.POST)
 	public String addProductBacklog(@ModelAttribute("productbacklog") ProductBacklog pb){
 		LOGGER.debug("Processing request for /employee/add");
 		
@@ -115,7 +114,7 @@ public class ProductBacklogController {
 			this.productBacklogService.updateProductBacklog(pb);
 		}
 		//add the product backlog in the database
-		return "redirect:/productbacklog";
+		return "redirect:/productbacklog/";
 		
 	}
 	
