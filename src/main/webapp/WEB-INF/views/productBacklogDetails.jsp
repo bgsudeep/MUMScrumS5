@@ -64,7 +64,7 @@
 			</div>
 			<div class="x_content">
 				<br>
-				<form:form action="details/userstory/add" id="demo-form2"
+				<form:form action="userstory/add" id="demo-form2"
 					data-parsley-validate="" class="form-horizontal form-label-left"
 					novalidate="" commandName="userstory">
 
@@ -185,7 +185,7 @@
 			</div>
 			<div class="x_content">
 				<br>
-				<form:form action="details/release/add" id="demo-form2"
+				<form:form action="release/add" id="demo-form2"
 					data-parsley-validate="" class="form-horizontal form-label-left"
 					novalidate="" commandName="releasebacklog">
 					
