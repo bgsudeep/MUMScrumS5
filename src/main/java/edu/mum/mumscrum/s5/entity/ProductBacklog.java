@@ -82,8 +82,7 @@ public class ProductBacklog {
 	@Override
 	public String toString() {
 		return "ProductBacklog [id=" + id + ", title=" + title + ", description=" + description + ", userStories="
-				+ userStories + "]";
+				+ userStories + ", releases=" + releases + "]";
 	}
-	
 	
 }
