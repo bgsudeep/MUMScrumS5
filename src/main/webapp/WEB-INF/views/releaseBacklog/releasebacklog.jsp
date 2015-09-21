@@ -67,7 +67,7 @@
 							<th>Description</th>
 							<th>Start Date</th>
 							<th>End Date</th>
-							<th>Action</th>
+							<!-- <th>Action</th> -->
 						</tr>
 					</thead>
 					<tbody>
@@ -76,15 +76,15 @@
 							<tr>
 								<td>${release.id}</td>
 								<td><a
-									href="/MUMScrumS5/productbacklog/${release.id}/details"><c:out
+									href="${release.id}/details/productbacklog/${productBacklog.id}"><c:out
 											value="${release.name}" /></a></td>
 								<td>${release.description}</td>
 								<td>${release.startDate}</td>
 								<td>${release.endDate}</td>
 
-								<td><a
-									href="<c:url value='productbacklog/edit/${release.id}' />">Edit</a>/<a
-									href="<c:url value='productbacklog/remove/${release.id}' />">Delete</a></td>
+								<%-- <td><a
+									href="<c:url value='releasebacklog/edit/${release.id}' />">Edit</a>/<a
+									href="<c:url value='productbacklog/remove/${release.id}' />">Delete</a></td> --%>
 							</tr>
 						</c:forEach>
 					</tbody>

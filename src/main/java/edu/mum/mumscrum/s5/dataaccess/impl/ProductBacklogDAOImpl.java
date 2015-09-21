@@ -1,6 +1,8 @@
 package edu.mum.mumscrum.s5.dataaccess.impl;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -11,8 +13,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.mum.mumscrum.s5.dataaccess.ProductBacklogDAO;
-import edu.mum.mumscrum.s5.entity.Employee;
 import edu.mum.mumscrum.s5.entity.ProductBacklog;
+import edu.mum.mumscrum.s5.entity.UserStory;
 
 @Repository
 public class ProductBacklogDAOImpl implements ProductBacklogDAO {
@@ -58,6 +60,24 @@ public class ProductBacklogDAOImpl implements ProductBacklogDAO {
 			LOGGER.info("ProductBacklog List::" + e);
 		}
 		return productBacklogList;
+	}
+
+	@Override
+	public Set<UserStory> getAvailableUserStories(ProductBacklog productBacklog) {
+
+		Set<UserStory> userStories = productBacklog.getUserStories();
+
+		Set<UserStory> availableUserStories = new HashSet<UserStory>();
+
+		for (UserStory userStory : userStories) {
+
+			if (userStory.getReleaseBacklog() == null) {
+
+				availableUserStories.add(userStory);
+			}
+		}
+
+		return availableUserStories;
 	}
 
 }

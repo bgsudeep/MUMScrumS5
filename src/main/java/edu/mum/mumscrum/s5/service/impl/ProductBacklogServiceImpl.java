@@ -1,6 +1,7 @@
 package edu.mum.mumscrum.s5.service.impl;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import edu.mum.mumscrum.s5.dataaccess.ProductBacklogDAO;
 import edu.mum.mumscrum.s5.entity.Employee;
 import edu.mum.mumscrum.s5.entity.ProductBacklog;
+import edu.mum.mumscrum.s5.entity.UserStory;
 import edu.mum.mumscrum.s5.service.ProductBacklogService;
 
 @Service
@@ -46,10 +48,9 @@ public class ProductBacklogServiceImpl implements ProductBacklogService{
 	public void setProductBacklogDAO(ProductBacklogDAO productBacklogDAO) {
 		this.productBacklogDAO = productBacklogDAO;
 	}
-	
-	
-	
-	
-	
 
+	@Override
+	public Set<UserStory> getAvailableUserStories(ProductBacklog productBacklog) {
+		return this.productBacklogDAO.getAvailableUserStories(productBacklog);
+	}
 }
