@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
@@ -33,11 +34,23 @@ public class Release {
 	private Set<Sprint> sprints = new HashSet<Sprint>();
 
 	private ProductBacklog productBacklog;
+	private Employee employee;
 
+	@OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="assigned_to", nullable = true)
+	public Employee getEmployee() {
+		return employee;
+	}
+	
 	@ManyToOne
 	@JoinColumn(name = "product_backlog_id", nullable = false)
 	public ProductBacklog getProductBacklog() {
 		return productBacklog;
+	}
+
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 
 	public void setProductBacklog(ProductBacklog productBacklog) {

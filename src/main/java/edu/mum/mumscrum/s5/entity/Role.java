@@ -56,4 +56,11 @@ public class Role {
 	public void setUserRoles(List<User> userRoles) {
 		this.userRoles = userRoles;
 	}
+
+	@Override
+	public String toString() {
+		return "Role [id=" + id + ", role=" + role + ", userRoles=" + userRoles + "]";
+	}
+	
+	
 }

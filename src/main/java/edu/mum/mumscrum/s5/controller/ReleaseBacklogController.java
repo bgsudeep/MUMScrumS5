@@ -1,20 +1,29 @@
 package edu.mum.mumscrum.s5.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import edu.mum.mumscrum.s5.entity.Employee;
 import edu.mum.mumscrum.s5.entity.ProductBacklog;
 import edu.mum.mumscrum.s5.entity.Release;
+import edu.mum.mumscrum.s5.entity.Role;
 import edu.mum.mumscrum.s5.entity.Sprint;
+import edu.mum.mumscrum.s5.entity.User;
 import edu.mum.mumscrum.s5.entity.UserStory;
 import edu.mum.mumscrum.s5.service.ProductBacklogService;
 import edu.mum.mumscrum.s5.service.ReleaseBacklogService;
+import edu.mum.mumscrum.s5.service.RoleService;
+import edu.mum.mumscrum.s5.service.UserService;
 import edu.mum.mumscrum.s5.service.UserStoryService;
 
 @Controller
@@ -32,6 +41,12 @@ public class ReleaseBacklogController {
 
 	@Autowired
 	private UserStoryService userStoryService;
+	
+	@Autowired
+	private RoleService roleService;
+	
+	@Autowired
+	private UserService userService;
 	//
 	// @Autowired
 	// private ReleaseBacklogService releaseBacklogService;
@@ -44,13 +59,48 @@ public class ReleaseBacklogController {
 		model.addAttribute("productBacklogList", this.productBacklogService.listProductBacklog());
 		return "dashboard";
 	}
+	
+	@RequestMapping(value = "/{releaseBacklogId}/assign", method = RequestMethod.GET)
+	public String assignReleaseBacklog(@PathVariable int releaseBacklogId, Model model) {
+		Release releaseBacklog = releaseBacklogService.getReleaseById(releaseBacklogId);
+		List<User> scrumMasters = new ArrayList<User>();
+		for (Role role : roleService.getRoles()) {
+			if(role.getRole().equals("Scrum Master")) {
+				for (User user : role.getUserRoles()) {
+					scrumMasters.add(user);
+				}
+			}
+		}
+		model.addAttribute("scrummasters", scrumMasters);
+		model.addAttribute("releasebacklog", releaseBacklog);
+		model.addAttribute("page", "releaseBacklog/assignReleaseBacklog");
+		
+		return "dashboard";
+	}
+	
+	@RequestMapping(value= "/{releaseBacklogId}/assign", method = RequestMethod.POST)
+	public String assignReleaseBacklogToScrumMaster(@PathVariable int releaseBacklogId,
+			@ModelAttribute("userId") int userId){
+		
+		User user = userService.getUserById(userId);
+		Employee employee = user.getEmployee();
+		
+		Release releaseBacklog = releaseBacklogService.getReleaseById(releaseBacklogId);
+		
+		releaseBacklog.setEmployee(employee);
+		
+		releaseBacklogService.updateRelease(releaseBacklog);
+		
+		return "redirect:/releasebacklog/";
+		
+	}
 
 	@RequestMapping("/{releaseBacklogId}/details/productbacklog/{productBacklogId}")
 	public String getProductBacklogDetails(@PathVariable int releaseBacklogId, @PathVariable int productBacklogId,
 			Model model) {
 		Release releaseBacklog = releaseBacklogService.getReleaseById(releaseBacklogId);
 		ProductBacklog productBacklog = productBacklogService.getProductBacklogById(productBacklogId);
-
+		
 		if (this.productBacklogService.getAvailableUserStories(productBacklog).size() > 0) {
 			model.addAttribute("availableUserStories", productBacklogService.getAvailableUserStories(productBacklog));
 		}

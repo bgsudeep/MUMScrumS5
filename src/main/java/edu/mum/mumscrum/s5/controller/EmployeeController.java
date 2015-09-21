@@ -79,7 +79,7 @@ public class EmployeeController {
 			this.employeeService.updateEmployee(e);
 		}
 		
-		return "redirect:/employees";
+		return "redirect:/employee";
 		
 	}
 	
@@ -95,7 +95,7 @@ public class EmployeeController {
 			return "error";
 		}
 		
-        return "redirect:/employees";
+        return "redirect:/employee";
     }
  
     @RequestMapping("/edit/{id}")

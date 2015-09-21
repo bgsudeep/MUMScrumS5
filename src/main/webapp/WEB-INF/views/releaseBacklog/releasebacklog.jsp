@@ -53,7 +53,9 @@
 
 		<div class="x_panel">
 			<div class="x_title">
-				<h2>Release Backlog for <b>${productBacklog.title}</b></h2>
+				<h2>
+					Release Backlog for <b>${productBacklog.title}</b>
+				</h2>
 
 				<div class="clearfix"></div>
 			</div>
@@ -67,7 +69,7 @@
 							<th>Description</th>
 							<th>Start Date</th>
 							<th>End Date</th>
-							<!-- <th>Action</th> -->
+							<th>Action</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -82,9 +84,12 @@
 								<td>${release.startDate}</td>
 								<td>${release.endDate}</td>
 
-								<%-- <td><a
-									href="<c:url value='releasebacklog/edit/${release.id}' />">Edit</a>/<a
-									href="<c:url value='productbacklog/remove/${release.id}' />">Delete</a></td> --%>
+								<td><a href="<c:url value='${release.id}/assign' />"> <c:choose>
+											<c:when test="${!empty release.employee}">Assigned</c:when>
+											<c:otherwise>Assign to SM<br />
+											</c:otherwise>
+										</c:choose>
+								</a>
 							</tr>
 						</c:forEach>
 					</tbody>

@@ -2,6 +2,7 @@ package edu.mum.mumscrum.s5.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -55,6 +56,9 @@ public class Employee {
 	@JoinTable(name = "employee_user", joinColumns = { @JoinColumn(name = "employee_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") })
 	@Cascade({ org.hibernate.annotations.CascadeType.ALL })
 	private User user;
+	
+	@OneToOne(fetch=FetchType.EAGER, mappedBy="employee")
+	private Release release;
 
 	@Column(name="joinDate")
 	private String joinDate;
@@ -155,11 +159,21 @@ public class Employee {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+
+	public Release getRelease() {
+		return release;
+	}
+
+	public void setRelease(Release release) {
+		this.release = release;
+	}
 
 	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
 				+ ", telephone=" + telephone + ", street=" + street + ", state=" + state + ", city=" + city + ", zip="
-				+ zip + "]";
+				+ zip + ", salary=" + salary + ", user=" + user + ", release=" + release + ", joinDate=" + joinDate
+				+ "]";
 	}
 }
