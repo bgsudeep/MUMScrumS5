@@ -115,7 +115,6 @@
 			<table class="table table-striped">
 				<thead>
 					<tr>
-						<th>S.N.</th>
 						<th>Title</th>
 						<th>Description</th>
 						<th>Action</th>
@@ -124,8 +123,7 @@
 				<tbody>
 					<c:forEach items="${productBacklogList}" var="productbacklog">
 						<tr>
-							<td>${productbacklog.id}</td>
-							<td><a href="${productbacklog.id}/details"><c:out
+							<td><a href="${productbacklog.id}"><c:out
 									value="${productbacklog.title}" /></a></td>
 							<td>${productbacklog.description}</td>
 							<td><a href="<c:url value='edit/${productbacklog.id}' />">Edit</a>/<a

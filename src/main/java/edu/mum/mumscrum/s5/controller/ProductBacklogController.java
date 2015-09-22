@@ -43,45 +43,45 @@ public class ProductBacklogController {
 		return "dashboard";
 	}
 	
-	@RequestMapping(value = {"/{productBacklogId}/userstory/add", "/{productBacklogId}/details/userstory/add"}, method = RequestMethod.POST)
-	public String saveUserStory(@PathVariable("productBacklogId") int id,
-			@ModelAttribute("userstory") UserStory userStory,
-			BindingResult result, RedirectAttributes redir) {
-
-		ProductBacklog productBacklog = productBacklogService.getProductBacklogById(id);
-
-		userStory.setProductBacklog(productBacklog);
-		userStoryService.addUserStory(userStory);
-
-		redir.addFlashAttribute("message", "New user story added!!!");
-
-		/*
-		 * Note that there is no slash "/" right after "redirect:" So, it
-		 * redirects to the path relative to the current path
-		 */
-		return "redirect:/productbacklog/" + id + "/details/";
-	}
+//	@RequestMapping(value = {"/{productBacklogId}/userstory/add", "/{productBacklogId}/details/userstory/add"}, method = RequestMethod.POST)
+//	public String saveUserStory(@PathVariable("productBacklogId") int id,
+//			@ModelAttribute("userstory") UserStory userStory,
+//			BindingResult result, RedirectAttributes redir) {
+//
+//		ProductBacklog productBacklog = productBacklogService.getProductBacklogById(id);
+//
+//		userStory.setProductBacklog(productBacklog);
+//		userStoryService.addUserStory(userStory);
+//
+//		redir.addFlashAttribute("message", "New user story added!!!");
+//
+//		/*
+//		 * Note that there is no slash "/" right after "redirect:" So, it
+//		 * redirects to the path relative to the current path
+//		 */
+//		return "redirect:/productbacklog/" + id + "/details/";
+//	}
 	
-	@RequestMapping(value = {"/{productBacklogId}/release/add", "/{productBacklogId}/details/release/add"}, method = RequestMethod.POST)
-	public String saveRelease(@PathVariable("productBacklogId") int id,
-			@ModelAttribute("releasebacklog") Release releaseBacklog,
-			BindingResult result, RedirectAttributes redir) {
-
-		ProductBacklog productBacklog = productBacklogService.getProductBacklogById(id);
-
-		releaseBacklog.setProductBacklog(productBacklog);
-		releaseBacklogService.addRelease(releaseBacklog);
-
-		redir.addFlashAttribute("message", "New user story added!!!");
-
-		/*
-		 * Note that there is no slash "/" right after "redirect:" So, it
-		 * redirects to the path relative to the current path
-		 */
-		return "redirect:/productbacklog/" + id + "/details/";
-	}
+//	@RequestMapping(value = {"/{productBacklogId}/release/add", "/{productBacklogId}/details/release/add"}, method = RequestMethod.POST)
+//	public String saveRelease(@PathVariable("productBacklogId") int id,
+//			@ModelAttribute("releasebacklog") Release releaseBacklog,
+//			BindingResult result, RedirectAttributes redir) {
+//
+//		ProductBacklog productBacklog = productBacklogService.getProductBacklogById(id);
+//
+//		releaseBacklog.setProductBacklog(productBacklog);
+//		releaseBacklogService.addRelease(releaseBacklog);
+//
+//		redir.addFlashAttribute("message", "New user story added!!!");
+//
+//		/*
+//		 * Note that there is no slash "/" right after "redirect:" So, it
+//		 * redirects to the path relative to the current path
+//		 */
+//		return "redirect:/productbacklog/" + id + "/details/";
+//	}
 	
-	@RequestMapping("/{productBacklogId}/details")
+	@RequestMapping("/{productBacklogId}")
 	public String getProductBacklogDetails(@PathVariable int productBacklogId,
 			Model model) {
 		ProductBacklog productBacklog = productBacklogService.getProductBacklogById(productBacklogId);

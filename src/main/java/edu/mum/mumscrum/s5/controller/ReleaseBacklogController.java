@@ -8,10 +8,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.mum.mumscrum.s5.entity.Employee;
 import edu.mum.mumscrum.s5.entity.ProductBacklog;
@@ -23,11 +25,11 @@ import edu.mum.mumscrum.s5.entity.UserStory;
 import edu.mum.mumscrum.s5.service.ProductBacklogService;
 import edu.mum.mumscrum.s5.service.ReleaseBacklogService;
 import edu.mum.mumscrum.s5.service.RoleService;
+import edu.mum.mumscrum.s5.service.SprintService;
 import edu.mum.mumscrum.s5.service.UserService;
 import edu.mum.mumscrum.s5.service.UserStoryService;
 
 @Controller
-@RequestMapping("/releasebacklog")
 
 public class ReleaseBacklogController {
 
@@ -47,11 +49,14 @@ public class ReleaseBacklogController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private SprintService springService;
 	//
 	// @Autowired
 	// private ReleaseBacklogService releaseBacklogService;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/releasebacklog", method = RequestMethod.GET)
 	public String listReleaseBacklogs(Model model) {
 		LOGGER.debug("Processing request for /releasebacklog");
 		model.addAttribute("releasebacklog", new Release());
@@ -60,10 +65,31 @@ public class ReleaseBacklogController {
 		return "dashboard";
 	}
 	
-	@RequestMapping(value = "/{releaseBacklogId}/assign", method = RequestMethod.GET)
+	
+	@RequestMapping(value = "productbacklog/{productBacklogId}/release/add", method = RequestMethod.POST)
+	public String addRelease(@PathVariable("productBacklogId") int id,
+			@ModelAttribute("releasebacklog") Release releaseBacklog,
+			BindingResult result, RedirectAttributes redir) {
+
+		ProductBacklog productBacklog = productBacklogService.getProductBacklogById(id);
+
+		releaseBacklog.setProductBacklog(productBacklog);
+		releaseBacklogService.addRelease(releaseBacklog);
+
+		redir.addFlashAttribute("message", "New user story added!!!");
+
+		/*
+		 * Note that there is no slash "/" right after "redirect:" So, it
+		 * redirects to the path relative to the current path
+		 */
+		return "redirect:/productbacklog/" + id;
+	}
+	
+	@RequestMapping(value = "/releasebacklog/{releaseBacklogId}/assign", method = RequestMethod.GET)
 	public String assignReleaseBacklog(@PathVariable int releaseBacklogId, Model model) {
 		Release releaseBacklog = releaseBacklogService.getReleaseById(releaseBacklogId);
 		List<User> scrumMasters = new ArrayList<User>();
+		scrumMasters.clear();
 		for (Role role : roleService.getRoles()) {
 			if(role.getRole().equals("Scrum Master")) {
 				for (User user : role.getUserRoles()) {
@@ -78,12 +104,16 @@ public class ReleaseBacklogController {
 		return "dashboard";
 	}
 	
-	@RequestMapping(value= "/{releaseBacklogId}/assign", method = RequestMethod.POST)
+	@RequestMapping(value= "/releasebacklog/{releaseBacklogId}/assign", method = RequestMethod.POST)
 	public String assignReleaseBacklogToScrumMaster(@PathVariable int releaseBacklogId,
 			@ModelAttribute("userId") int userId){
 		
-		User user = userService.getUserById(userId);
-		Employee employee = user.getEmployee();
+		Employee employee = null;
+		
+		if(userId != 0) {
+			User user = userService.getUserById(userId);
+			employee = user.getEmployee();
+		}
 		
 		Release releaseBacklog = releaseBacklogService.getReleaseById(releaseBacklogId);
 		
@@ -95,7 +125,7 @@ public class ReleaseBacklogController {
 		
 	}
 
-	@RequestMapping("/{releaseBacklogId}/details/productbacklog/{productBacklogId}")
+	@RequestMapping(value = "/productbacklog/{productBacklogId}/releasebacklog/{releaseBacklogId}", method = RequestMethod.GET)
 	public String getProductBacklogDetails(@PathVariable int releaseBacklogId, @PathVariable int productBacklogId,
 			Model model) {
 		Release releaseBacklog = releaseBacklogService.getReleaseById(releaseBacklogId);
@@ -108,6 +138,7 @@ public class ReleaseBacklogController {
 		if (releaseBacklog.getUserStories().size() > 0) {
 			model.addAttribute("userStoryList", releaseBacklog.getUserStories());
 		}
+		
 		if (releaseBacklog.getSprints().size() > 0) {
 			model.addAttribute("sprintList", releaseBacklog.getSprints());
 		}
@@ -122,8 +153,10 @@ public class ReleaseBacklogController {
 
 		return "dashboard";
 	}
+	
+	
 
-	@RequestMapping(value = "/{releaseBacklogId}/details/productbacklog/{productBacklogId}/userstory/add/{userStoryId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/productbacklog/{productBacklogId}/releasebacklog/{releaseBacklogId}/userstory/add/{userStoryId}", method = RequestMethod.GET)
 	public String assignUserStories(@PathVariable int releaseBacklogId, @PathVariable int productBacklogId,
 			@PathVariable int userStoryId) {
 
@@ -134,10 +167,10 @@ public class ReleaseBacklogController {
 
 		userStoryService.updateUserStory(userStory);
 
-		return "redirect:/releasebacklog/{releaseBacklogId}/details/productbacklog/{productBacklogId}";
+		return "redirect:/productbacklog/{productBacklogId}/releasebacklog/{releaseBacklogId}";
 	}
 	
-	@RequestMapping(value = "/{releaseBacklogId}/details/productbacklog/{productBacklogId}/userstory/remove/{userStoryId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/productbacklog/{productBacklogId}/releasebacklog/{releaseBacklogId}/userstory/remove/{userStoryId}", method = RequestMethod.GET)
 	public String removeUserStories(@PathVariable int releaseBacklogId, @PathVariable int productBacklogId,
 			@PathVariable int userStoryId) {
 
@@ -146,7 +179,7 @@ public class ReleaseBacklogController {
 
 		userStoryService.updateUserStory(userStory);
 
-		return "redirect:/releasebacklog/{releaseBacklogId}/details/productbacklog/{productBacklogId}";
+		return "redirect:/productbacklog/{productBacklogId}/releasebacklog/{releaseBacklogId}";
 	}
 
 }

@@ -40,7 +40,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	@Override
 	@Transactional
 	public List<Employee> listEmployees() {
-		List<Employee> employeeList = entityManager.createQuery("select o from Employee o", Employee.class).getResultList();
+		List<Employee> employeeList = entityManager.createQuery("select o from Employee o where o.id > 1", Employee.class).getResultList();
 		
 		for(Employee e : employeeList){
 			LOGGER.info("Employee List::" + e);

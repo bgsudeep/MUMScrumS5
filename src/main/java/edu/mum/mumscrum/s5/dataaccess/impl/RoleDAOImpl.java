@@ -33,7 +33,7 @@ public class RoleDAOImpl implements RoleDAO {
 	@Override
 	@Transactional
 	public Set<Role> getRoles() {
-		List<Role> roleList = entityManager.createQuery("select o from Role o", Role.class).getResultList();
+		List<Role> roleList = entityManager.createQuery("select o from Role o where o.id > 1", Role.class).getResultList();
 
 		Set<Role> roleSet = new HashSet<Role>();
 		

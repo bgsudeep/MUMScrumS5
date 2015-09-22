@@ -64,7 +64,6 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th>S.N.</th>
 							<th>Title</th>
 							<th>Description</th>
 							<th>Start Date</th>
@@ -76,16 +75,15 @@
 
 						<c:forEach var="release" items="${productBacklog.releases}">
 							<tr>
-								<td>${release.id}</td>
 								<td><a
-									href="${release.id}/details/productbacklog/${productBacklog.id}"><c:out
+									href="../productbacklog/${productBacklog.id}/releasebacklog/${release.id}/"><c:out
 											value="${release.name}" /></a></td>
 								<td>${release.description}</td>
 								<td>${release.startDate}</td>
 								<td>${release.endDate}</td>
 
 								<td><a href="<c:url value='${release.id}/assign' />"> <c:choose>
-											<c:when test="${!empty release.employee}">Assigned</c:when>
+											<c:when test="${!empty release.employee}">Change Assignee</c:when>
 											<c:otherwise>Assign to SM<br />
 											</c:otherwise>
 										</c:choose>

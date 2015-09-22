@@ -52,7 +52,7 @@
 
 
 	<!-- User Story -->
-	<form:form action="assign">
+	<form:form action="assign" method="POST">
 	<div class="x_title">
 		<h2>
 			Assign Scrum Master to <b>${releasebacklog.name }</b>
@@ -69,7 +69,7 @@
 			<p>
 				<label for="heard">Select Scrum Master:</label> <select
 					data-parsley-id="9143" id="heard" class="form-control" name="userId">
-					<option>Choose..</option>
+					<option value = 0>Choose..</option>
 					<c:forEach items="${scrummasters}" var="user">
 						<option value="${user.id}">${user.username}</option>
 					</c:forEach>

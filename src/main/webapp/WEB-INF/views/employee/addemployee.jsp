@@ -65,16 +65,6 @@
 			<form:form action="${addAction}" commandName="employee"
 				id="demo-form" data-parsley-validate="" novalidate="">
 				<%-- Value = ${employee} --%>
-				<div class="form-group">
-					<c:if test="${!empty employee.firstName}">
-
-						<form:label for="id" path="id">ID *</form:label>
-						<form:input type="text" path="id" readonly="true" disabled="true"
-							class="form-control" name="firstName" required="required" />
-						<form:hidden path="id" />
-
-					</c:if>
-				</div>
 
 				<div class="form-group">
 					<form:label for="firstName" path="firstName">First Name *</form:label>

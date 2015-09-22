@@ -65,7 +65,6 @@
 			<table class="table table-striped">
 				<tbody>
 					<tr>
-						<th style="width: 10px">ID</th>
 						<th style="width: 5px">First Name</th>
 						<th style="width: 5px">Last Name</th>
 						<th style="width: 5px">Email</th>
@@ -81,7 +80,6 @@
 					</tr>
 					<c:forEach items="${listEmployees}" var="employee">
 						<tr>
-							<td>${employee.id}</td>
 							<td>${employee.firstName}</td>
 							<td>${employee.lastName}</td>
 							<td>${employee.email}</td>

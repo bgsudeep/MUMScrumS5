@@ -64,7 +64,7 @@
 			</div>
 			<div class="x_content">
 				<br>
-				<form:form action="#" id="demo-form2" data-parsley-validate=""
+				<form:form action="sprint/add/" id="demo-form2" data-parsley-validate=""
 					class="form-horizontal form-label-left" novalidate=""
 					commandName="sprint">
 
@@ -114,16 +114,16 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${releaseBacklogList}" var="releaseBacklog">
+						<c:forEach items="${sprintList}" var="sprint">
 							<tr>
 								<td><a
-									href="/MUMScrumS5/productbacklog/${releaseBacklog.id}/details"><c:out
-											value="${releaseBacklog.name}" /></a></td>
-								<td>${releaseBacklog.description}</td>
+									href="/MUMScrumS5/productbacklog/${sprint.id}/details"><c:out
+											value="${sprint.title}" /></a></td>
+								<td>${sprint.description}</td>
 
 								<td><a href="<c:url value='#' />">View Burndown Chart</a>/<a
 									href="<c:url value='#' />">Edit</a>/<a
-									href="<c:url value='productbacklog/remove/${releaseBacklog.id}' />">Delete</a></td>
+									href="<c:url value='productbacklog/remove/${sprint.id}' />">Delete</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -134,7 +134,7 @@
 			</div>
 		</div>
 
-		<form method="GET" id="addUserStory">
+		<form>
 			<div>
 				<div class="x_panel">
 					<div class="x_title">
@@ -174,7 +174,7 @@
 
 										<td>
 											<button
-												formaction="${productbacklog.id}/userstory/add/${userstory.id}/"
+												formaction="/MUMScrumS5/productbacklog/${productbacklog.id}/releasebacklog/${releasebacklog.id}/userstory/add/${userstory.id}/"
 												type="submit">Add to Release</button>
 									</tr>
 								</c:forEach>
@@ -225,7 +225,7 @@
 
 									<td>
 										<button
-											formaction="${productbacklog.id}/userstory/remove/${userstory.id}/"
+											formaction="/MUMScrumS5/productbacklog/${productbacklog.id}/releasebacklog/${releasebacklog.id}/userstory/remove/${userstory.id}/"
 											type="submit">Remove from Release</button>
 									</td>
 								</tr>
