@@ -135,7 +135,6 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th>S.N.</th>
 							<th>Title</th>
 							<th>Description</th>
 							<th>Est. Dev. Hours</th>
@@ -148,7 +147,6 @@
 					<tbody>
 						<c:forEach items="${userStoryList}" var="userstory">
 							<tr>
-								<td>${userstory.id}</td>
 								<td><a
 									href="/MUMScrumS5/productbacklog/${userstory.id}/details"><c:out
 											value="${userstory.title}" /></a></td>
@@ -160,7 +158,7 @@
 
 								<td><a
 									href="<c:url value='productbacklog/edit/${userstory.id}' />">Edit</a>/<a
-									href="<c:url value='productbacklog/remove/${userstory.id}' />">Delete</a></td>
+									href="<c:url value='${productbacklog.id}/userstory/${userstory.id}/delete' />">Delete</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -185,7 +183,7 @@
 			</div>
 			<div class="x_content">
 				<br>
-				<form:form action="${productbacklog.id}/release/add" id="demo-form2"
+				<form:form action="${productbacklog.id}/releasebacklog/add" id="demo-form2"
 					data-parsley-validate="" class="form-horizontal form-label-left"
 					novalidate="" commandName="releasebacklog">
 					
@@ -239,7 +237,6 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th>S.N.</th>
 							<th>Title</th>
 							<th>Description</th>
 							<th>Start Date</th>
@@ -250,7 +247,6 @@
 					<tbody>
 						<c:forEach items="${releaseBacklogList}" var="releaseBacklog">
 							<tr>
-								<td>${releaseBacklog.id}</td>
 								<td><a
 									href="/MUMScrumS5/productbacklog/${releaseBacklog.id}/details"><c:out
 											value="${releaseBacklog.name}" /></a></td>
@@ -259,8 +255,8 @@
 								<td>${releaseBacklog.endDate}</td>
 								
 								<td><a
-									href="<c:url value='productbacklog/edit/${releaseBacklog.id}' />">Edit</a>/<a
-									href="<c:url value='productbacklog/remove/${releaseBacklog.id}' />">Delete</a></td>
+									<%-- href="<c:url value='productbacklog/edit/${releaseBacklog.id}' />">Edit</a>/<a --%>
+									href="<c:url value='${productbacklog.id}/releasebacklog/${releaseBacklog.id}/delete' />">Delete</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>

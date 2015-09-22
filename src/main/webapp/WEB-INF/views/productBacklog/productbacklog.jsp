@@ -117,7 +117,6 @@
 					<tr>
 						<th>Title</th>
 						<th>Description</th>
-						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -126,8 +125,6 @@
 							<td><a href="${productbacklog.id}"><c:out
 									value="${productbacklog.title}" /></a></td>
 							<td>${productbacklog.description}</td>
-							<td><a href="<c:url value='edit/${productbacklog.id}' />">Edit</a>/<a
-								href="<c:url value='remove/${productbacklog.id}' />">Delete</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

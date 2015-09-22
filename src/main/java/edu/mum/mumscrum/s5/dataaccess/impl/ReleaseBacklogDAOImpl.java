@@ -1,6 +1,8 @@
 package edu.mum.mumscrum.s5.dataaccess.impl;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -11,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.mum.mumscrum.s5.dataaccess.ReleaseBacklogDAO;
-import edu.mum.mumscrum.s5.dataaccess.UserStoryDAO;
+import edu.mum.mumscrum.s5.entity.ProductBacklog;
 import edu.mum.mumscrum.s5.entity.Release;
 import edu.mum.mumscrum.s5.entity.UserStory;
 
@@ -71,5 +73,24 @@ public class ReleaseBacklogDAOImpl implements ReleaseBacklogDAO {
 		LOGGER.info("Release deleted successfully, Release details=" + r);
 
 	}
+
+	@Override
+	public Set<UserStory> getAvailableUserStories(Release releaseBacklog) {
+		Set<UserStory> userStories = releaseBacklog.getUserStories();
+
+		Set<UserStory> availableUserStories = new HashSet<UserStory>();
+
+		for (UserStory userStory : userStories) {
+
+			if (userStory.getSprint() == null) {
+
+				availableUserStories.add(userStory);
+			}
+		}
+
+		return availableUserStories;
+	}
+	
+	
 
 }

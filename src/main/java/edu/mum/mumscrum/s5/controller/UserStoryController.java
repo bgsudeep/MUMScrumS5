@@ -19,7 +19,6 @@ import edu.mum.mumscrum.s5.entity.Employee;
 import edu.mum.mumscrum.s5.entity.ProductBacklog;
 import edu.mum.mumscrum.s5.entity.Release;
 import edu.mum.mumscrum.s5.entity.Role;
-import edu.mum.mumscrum.s5.entity.Sprint;
 import edu.mum.mumscrum.s5.entity.User;
 import edu.mum.mumscrum.s5.entity.UserStory;
 import edu.mum.mumscrum.s5.service.ProductBacklogService;
@@ -78,6 +77,117 @@ public class UserStoryController {
 		 * redirects to the path relative to the current path
 		 */
 		return "redirect:/productbacklog/" + id;
+	}
+	
+	@RequestMapping(value = "productbacklog/{productBacklogId}/userstory/{userStoryId}/delete")
+	public String removeUserStory(@PathVariable int userStoryId, @PathVariable int productBacklogId) {
+		
+//		try {
+//			this.userStoryService.removeUserStory(userStoryId);
+//		}
+//		catch(Exception e) {
+//			e.printStackTrace();
+//			return "error";
+//		}
+		
+		
+		this.userStoryService.removeUserStory(userStoryId);
+
+		return "redirect:/productbacklog/" + productBacklogId;
+	}
+	
+	@RequestMapping(value = "/productbacklog/{productBacklogId}/releasebacklog/{releaseBacklogId}/sprint/{sprintId}/userstory/{userStoryId}/assign/developer")
+	public String assignDeveloper(@PathVariable int productBacklogId, @PathVariable int releaseBacklogId, @PathVariable int sprintId, @PathVariable int userStoryId, Model model) {
+		List<User> developers = new ArrayList<User>();
+		developers.clear();
+		for (Role role : roleService.getRoles()) {
+			if(role.getRole().equals("Developer")) {
+				for (User user : role.getUserRoles()) {
+					developers.add(user);
+				}
+			}
+		}
+		
+		
+		UserStory userStory = userStoryService.getUserStoryById(userStoryId);
+		
+		if(userStory.getDeveloper() != null) {
+			model.addAttribute("assignedEmployee", userStory.getDeveloper());
+		}
+		
+		model.addAttribute("developers", developers);
+		model.addAttribute("page", "sprint/assignDeveloper");
+		model.addAttribute("userstory", userStory);
+		
+		
+//		return "redirect:/productbacklog/{productBacklogId}/releasebacklog/{releaseBacklogId}/sprint/{sprintId}";
+		return "dashboard";
+	}
+	
+	@RequestMapping(value = "/productbacklog/{productBacklogId}/releasebacklog/{releaseBacklogId}/sprint/{sprintId}/userstory/{userStoryId}/assign/tester")
+	public String assignTester(@PathVariable int productBacklogId, @PathVariable int releaseBacklogId, @PathVariable int sprintId, @PathVariable int userStoryId, Model model) {
+		List<User> testers = new ArrayList<User>();
+		testers.clear();
+		for (Role role : roleService.getRoles()) {
+			if(role.getRole().equals("Tester")) {
+				for (User user : role.getUserRoles()) {
+					testers.add(user);
+				}
+			}
+		}
+		
+		UserStory userStory = userStoryService.getUserStoryById(userStoryId);
+		model.addAttribute("testers", testers);
+		model.addAttribute("page", "sprint/assignTester");
+		model.addAttribute("userstory", userStory);
+		
+		
+//		return "redirect:/productbacklog/{productBacklogId}/releasebacklog/{releaseBacklogId}/sprint/{sprintId}";
+		return "dashboard";
+	}
+	
+	@RequestMapping(value= "/productbacklog/{productBacklogId}/releasebacklog/{releaseBacklogId}/sprint/{sprintId}/userstory/{userStoryId}/assign/developer", method = RequestMethod.POST)
+	public String assignUserStoryToDeveloper(@PathVariable int productBacklogId, @PathVariable int releaseBacklogId,
+			@PathVariable int sprintId, @PathVariable int userStoryId,
+			@ModelAttribute("userId") int userId){
+		
+		Employee employee = null;
+		
+		if(userId != 0) {
+			User user = userService.getUserById(userId);
+			employee = user.getEmployee();
+		}
+		
+		UserStory userStory = userStoryService.getUserStoryById(userStoryId);
+		
+		userStory.setDeveloper(employee);
+		
+		userStoryService.updateUserStory(userStory);
+		
+		return "redirect:/productbacklog/{productBacklogId}/releasebacklog/{releaseBacklogId}/sprint/{sprintId}/";
+		
+	}
+	
+	@RequestMapping(value= "/productbacklog/{productBacklogId}/releasebacklog/{releaseBacklogId}/sprint/{sprintId}/userstory/{userStoryId}/assign/tester", method = RequestMethod.POST)
+	public String assignUserStoryToTester(@PathVariable int productBacklogId, @PathVariable int releaseBacklogId,
+			@PathVariable int sprintId, @PathVariable int userStoryId,
+			@ModelAttribute("userId") int userId){
+		
+		Employee employee = null;
+		
+		if(userId != 0) {
+			User user = userService.getUserById(userId);
+			employee = user.getEmployee();
+		}
+		
+		UserStory userStory = userStoryService.getUserStoryById(userStoryId);
+		
+		userStory.setTester(employee);
+		
+		userStoryService.updateUserStory(userStory);
+		
+		return "redirect:/productbacklog/{productBacklogId}/releasebacklog/{releaseBacklogId}/sprint/{sprintId}/";
+		
 	}
 
 }

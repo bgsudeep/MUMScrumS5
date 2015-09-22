@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.mum.mumscrum.s5.dataaccess.SprintDAO;
+import edu.mum.mumscrum.s5.entity.Employee;
 import edu.mum.mumscrum.s5.entity.ProductBacklog;
 import edu.mum.mumscrum.s5.entity.Sprint;
 import edu.mum.mumscrum.s5.entity.UserStory;
@@ -60,22 +61,13 @@ public class SprintDAOImpl implements SprintDAO {
 		return sprintList;
 	}
 
-//	@Override
-//	public Set<UserStory> getAvailableUserStories(ProductBacklog productBacklog) {
-//
-//		Set<UserStory> userStories = productBacklog.getUserStories();
-//
-//		Set<UserStory> availableUserStories = new HashSet<UserStory>();
-//
-//		for (UserStory userStory : userStories) {
-//
-//			if (userStory.getReleaseBacklog() == null) {
-//
-//				availableUserStories.add(userStory);
-//			}
-//		}
-//
-//		return availableUserStories;
-//	}
-
+	@Override
+	@Transactional
+	public void removeSprint(int id) {
+		Sprint sprint = getSprintById(id);
+		if(null != sprint){
+			entityManager.remove(sprint);
+		}
+		LOGGER.info("Sprint deleted successfully, sprint details=" + sprint);
+	}
 }

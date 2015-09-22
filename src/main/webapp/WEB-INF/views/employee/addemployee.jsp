@@ -65,6 +65,7 @@
 			<form:form action="${addAction}" commandName="employee"
 				id="demo-form" data-parsley-validate="" novalidate="">
 				<%-- Value = ${employee} --%>
+				<form:input type="hidden" path="id" class="form-control" name="id" />
 
 				<div class="form-group">
 					<form:label for="firstName" path="firstName">First Name *</form:label>

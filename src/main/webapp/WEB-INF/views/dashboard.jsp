@@ -39,6 +39,12 @@
 
 <script src="<%=request.getContextPath()%>/resources/js/jquery.min.js"></script>
 <script src="<%=request.getContextPath()%>/resources/js/nprogress.js"></script>
+
+<!-- PNotify -->
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/notify/pnotify.core.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/notify/pnotify.buttons.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/notify/pnotify.nonblock.js"></script>
+
 <!-- <script>
         NProgress.start();
     </script> -->
@@ -123,6 +129,12 @@
 
 									</ul></li>
 									
+									<li><a><i class="fa fa-bar-chart-o"></i> Sprint<span
+										class="fa fa-chevron-down"></span></a>
+									<ul class="nav child_menu" style="display: none">
+										<li><a href="<c:url value='/sprint/' />">Sprints</a></li>
+
+									</ul></li>
 
 
 								<li><a><i class="fa fa-bar-chart-o"></i> Charts<span

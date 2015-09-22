@@ -51,6 +51,10 @@
 </h1> -->
 
 
+
+
+	<c:url var="saveAction"
+		value="/productbacklog/${productbacklog.id}/releasebacklog/${releasebacklog.id}/sprint/save" />
 	<!-- User Story -->
 	<div class="col-md-12">
 
@@ -64,9 +68,11 @@
 			</div>
 			<div class="x_content">
 				<br>
-				<form:form action="sprint/add/" id="demo-form2" data-parsley-validate=""
-					class="form-horizontal form-label-left" novalidate=""
-					commandName="sprint">
+				<form:form action="${saveAction}" id="demo-form2"
+					data-parsley-validate="" class="form-horizontal form-label-left"
+					novalidate="" commandName="sprint">
+
+					<form:input type="hidden" path="id" class="form-control" name="id" />
 
 					<div class="form-group">
 						<form:label for="title" path="title">Sprint Name *</form:label>
@@ -85,7 +91,7 @@
 						<div class="col-sm-6 col-xs-12">
 
 
-							<button type="submit" class="btn btn-success">Add</button>
+							<button type="submit" class="btn btn-success">${buttonTitle}</button>
 						</div>
 					</div>
 
@@ -122,8 +128,8 @@
 								<td>${sprint.description}</td>
 
 								<td><a href="<c:url value='#' />">View Burndown Chart</a>/<a
-									href="<c:url value='#' />">Edit</a>/<a
-									href="<c:url value='productbacklog/remove/${sprint.id}' />">Delete</a></td>
+									href="<c:url value='/productbacklog/${productbacklog.id}/releasebacklog/${releasebacklog.id}/sprint/${sprint.id}/edit' />">Edit</a>/<a
+									href="<c:url value='/productbacklog/${productbacklog.id}/releasebacklog/${releasebacklog.id}/sprint/${sprint.id}/delete' />">Delete</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>

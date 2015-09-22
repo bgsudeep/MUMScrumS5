@@ -4,11 +4,13 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -57,6 +59,28 @@ public class UserStory {
 	@ManyToOne
 	@JoinColumn(name = "sprint_id", nullable = true)
 	private Sprint sprint;
+	
+	@ManyToOne
+	@JoinColumn(name="assigned_developer", nullable = true)
+	private Employee developer;
+	public Employee getDeveloper() {
+		return developer;
+	}
+	
+	@ManyToOne
+	@JoinColumn(name="assigned_tester", nullable = true)
+	private Employee tester;
+	public Employee getTester() {
+		return tester;
+	}
+	
+	public void setDeveloper(Employee developer) {
+		this.developer = developer;
+	}
+
+	public void setTester(Employee tester) {
+		this.tester = tester;
+	}
 
 	public int getId() {
 		return id;

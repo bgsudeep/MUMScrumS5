@@ -1,5 +1,8 @@
 package edu.mum.mumscrum.s5.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -19,7 +23,7 @@ import org.hibernate.annotations.Cascade;
 @Entity
 @Table(name="employee")
 public class Employee {
-
+	
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -59,6 +63,30 @@ public class Employee {
 	
 	@OneToOne(fetch=FetchType.EAGER, mappedBy="employee")
 	private Release release;
+	
+	@OneToMany(fetch=FetchType.EAGER, mappedBy="developer")
+	@Cascade({ org.hibernate.annotations.CascadeType.MERGE,
+		org.hibernate.annotations.CascadeType.SAVE_UPDATE })
+	private Set<UserStory> userStoriesForDeveloper = new HashSet<UserStory>();
+	public Set<UserStory> getUserStoriesForDeveloper() {
+		return userStoriesForDeveloper;
+	}
+	
+	@OneToMany(fetch=FetchType.EAGER, mappedBy="tester")
+	@Cascade({ org.hibernate.annotations.CascadeType.MERGE,
+		org.hibernate.annotations.CascadeType.SAVE_UPDATE })
+	private Set<UserStory> userStoriesForTester = new HashSet<UserStory>();
+	public Set<UserStory> getUserStoriesForTester() {
+		return userStoriesForTester;
+	}
+
+	public void setUserStoriesForDeveloper(Set<UserStory> userStoriesForDeveloper) {
+		this.userStoriesForDeveloper = userStoriesForDeveloper;
+	}
+
+	public void setUserStoriesForTester(Set<UserStory> userStoriesForTester) {
+		this.userStoriesForTester = userStoriesForTester;
+	}
 
 	@Column(name="joinDate")
 	private String joinDate;

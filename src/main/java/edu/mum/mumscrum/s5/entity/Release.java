@@ -133,4 +133,10 @@ public class Release {
 		this.endDate = endDate;
 	}
 
+	@Override
+	public String toString() {
+		return "Release [id=" + id + ", name=" + name + ", sprints=" + sprints + "]";
+	}
+	
+
 }

@@ -9,4 +9,5 @@ public interface SprintService {
 	public void updateSprint(Sprint sprint);
 	public Sprint getSprintById(int id);
 	public List<Sprint> listSprint();
+	public void removeSprint(int id);
 }

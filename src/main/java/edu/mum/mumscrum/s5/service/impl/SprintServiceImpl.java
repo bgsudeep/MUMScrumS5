@@ -37,4 +37,11 @@ public class SprintServiceImpl implements SprintService {
 	public List<Sprint> listSprint() {
 		return this.sprintDAO.listSprint();
 	}
+
+	@Override
+	public void removeSprint(int id) {
+		this.sprintDAO.removeSprint(id);
+	}
+	
+	
 }
