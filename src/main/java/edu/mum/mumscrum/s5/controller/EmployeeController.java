@@ -61,26 +61,43 @@ public class EmployeeController {
 		
 		
 		
+		
+//		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//		String encodedPassword = encoder.encode(e.getUser().getPassword());
+//		
+//		e.getUser().setPassword(encodedPassword);
+		
 		if(e.getId() == 0){
 			//new employee, add it
 			String roleID = e.getUser().getRoleID();
 			Role role = roleService.getRoleById(Integer.valueOf(roleID));
-			
-//			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//			String encodedPassword = encoder.encode(e.getUser().getPassword());
-//			
-//			e.getUser().setPassword(encodedPassword);
-			
 			e.getUser().addRole(role);
-			
 			this.employeeService.addEmployee(e);
 		}else{
 			//existing employee, call update
-			this.employeeService.updateEmployee(e);
+			Employee dbEmployee = employeeService.getEmployeeById(e.getId());
+			
+			copyProperties(e, dbEmployee);
+			
+			this.employeeService.updateEmployee(dbEmployee);
 		}
 		
 		return "redirect:/employee/";
 		
+	}
+	
+	private void copyProperties(Employee source, Employee destination) {
+
+		destination.setFirstName(source.getFirstName());
+		destination.setLastName(source.getLastName());
+		destination.setEmail(source.getEmail());
+		destination.setTelephone(source.getTelephone());
+		destination.setStreet(source.getStreet());
+		destination.setCity(source.getCity());
+		destination.setState(source.getState());
+		destination.setZip(source.getZip());
+		destination.setSalary(source.getSalary());
+		destination.setJoinDate(source.getJoinDate());
 	}
 	
 	@RequestMapping("/remove/{id}")
@@ -102,7 +119,20 @@ public class EmployeeController {
     public String editEmployee(@PathVariable("id") int id, Model model){
 		LOGGER.debug("Processing request for /employee/edit");
 
-		model.addAttribute("employee", this.employeeService.getEmployeeById(id));
+		Employee e = this.employeeService.getEmployeeById(id);
+		
+		model.addAttribute("employee", e);
+		
+		for (Role role : roleService.getRoles()) {
+			System.out.println("Role: " + role.getRole());
+			for (User user : role.getUserRoles()) {
+				if(e.getUser().getId() == user.getId()) {
+					model.addAttribute("roleID", role.getId() + "");
+				}
+			}
+		}
+		
+		model.addAttribute("roles", roleService.getRoles());
 		model.addAttribute("page", "employee/addemployee");
 //        model.addAttribute("listPersons", this.employeeService.listEmployee());
         return "dashboard";

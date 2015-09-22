@@ -157,8 +157,11 @@
 					</div>
 
 				</c:if>
+				<c:if test = "${!empty employee.firstName}">
+					<form:input path = "user.roleID" value = "${roleID}" type = "hidden"></form:input>
+				</c:if>
 
-
+				
 
 				<form:input path="id" type="hidden" />
 				<form:input path="user.enabled" type="hidden" value="true" />

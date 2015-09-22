@@ -2,6 +2,7 @@ package edu.mum.mumscrum.s5.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -48,7 +49,7 @@ public class UserStory {
 	@Column
 	private Date completedDate;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	@JoinColumn(name = "product_backlog_id", nullable = false)
 	private ProductBacklog productBacklog;
 

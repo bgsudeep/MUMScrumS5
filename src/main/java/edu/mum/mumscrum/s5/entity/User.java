@@ -50,14 +50,14 @@ public class User implements Serializable {
 	@OneToOne
 	@JoinTable(name="employee_user", joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
 		inverseJoinColumns={@JoinColumn(name="employee_id", referencedColumnName="id")})
-	@Cascade({org.hibernate.annotations.CascadeType.ALL})
+//	@Cascade({org.hibernate.annotations.CascadeType.ALL})
 	private Employee employee;
 	
 	@ManyToMany
 	@JoinTable(name="user_role", joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
 			inverseJoinColumns={@JoinColumn(name="role_id", referencedColumnName="id")})
-	@Cascade({ org.hibernate.annotations.CascadeType.MERGE,
-		org.hibernate.annotations.CascadeType.SAVE_UPDATE })
+//	@Cascade({
+//		org.hibernate.annotations.CascadeType.SAVE_UPDATE })
 	private List<Role> roles = new ArrayList<Role>();
 	
 	public int getId() {
@@ -105,6 +105,7 @@ public class User implements Serializable {
 	}
 	
 	public void addRole(Role role) {
+		this.roles.clear();
 		this.roles.add(role);
 	}
 	

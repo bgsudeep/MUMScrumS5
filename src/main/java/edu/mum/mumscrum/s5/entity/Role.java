@@ -29,8 +29,8 @@ public class Role {
 	
 	@ManyToMany
 	@JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "role_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") })
-	@Cascade({ org.hibernate.annotations.CascadeType.MERGE,
-			org.hibernate.annotations.CascadeType.SAVE_UPDATE })
+//	@Cascade({
+//			org.hibernate.annotations.CascadeType.SAVE_UPDATE })
 	private List<User> userRoles = new ArrayList<User>();
 
 	public int getId() {
