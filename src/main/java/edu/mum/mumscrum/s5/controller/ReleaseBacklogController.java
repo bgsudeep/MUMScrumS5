@@ -142,38 +142,6 @@ public class ReleaseBacklogController {
 		
 	}
 
-	@RequestMapping(value = "/productbacklog/{productBacklogId}/releasebacklog/{releaseBacklogId}/sprint/{sprintID}/edit", method = RequestMethod.GET)
-	public String getReleaseBacklogDetails(@PathVariable int releaseBacklogId, @PathVariable int productBacklogId, @PathVariable int sprintID,
-			Model model) {
-		Release releaseBacklog = releaseBacklogService.getReleaseById(releaseBacklogId);
-		ProductBacklog productBacklog = productBacklogService.getProductBacklogById(productBacklogId);
-		
-		if (this.productBacklogService.getAvailableUserStories(productBacklog).size() > 0) {
-			model.addAttribute("availableUserStories", productBacklogService.getAvailableUserStories(productBacklog));
-		}
-
-		if (releaseBacklog.getUserStories().size() > 0) {
-			model.addAttribute("userStoryList", releaseBacklog.getUserStories());
-		}
-		
-		if (releaseBacklog.getSprints().size() > 0) {
-			model.addAttribute("sprintList", releaseBacklog.getSprints());
-		}
-		
-
-		UserStory userStory = new UserStory();
-		Sprint sprint = sprintService.getSprintById(sprintID);
-		model.addAttribute("userstory", userStory);
-		model.addAttribute("productbacklog", productBacklog);
-		model.addAttribute("releasebacklog", releaseBacklog);
-		model.addAttribute("sprint", sprint);
-		model.addAttribute("buttonTitle", "Edit");
-		model.addAttribute("page", "releaseBacklog/releaseBacklogDetails");
-
-		return "dashboard";
-	}
-	
-	
 	@RequestMapping(value = "/productbacklog/{productBacklogId}/releasebacklog/{releaseBacklogId}", method = RequestMethod.GET)
 	public String getReleasebacklogDetails(@PathVariable int releaseBacklogId, @PathVariable int productBacklogId,Model model) {
 		Release releaseBacklog = releaseBacklogService.getReleaseById(releaseBacklogId);

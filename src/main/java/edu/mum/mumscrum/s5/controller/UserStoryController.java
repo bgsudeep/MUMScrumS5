@@ -60,7 +60,7 @@ public class UserStoryController {
 		return "dashboard";
 	}
 	
-	@RequestMapping(value = "/productbacklog/{productBacklogId}/userstory/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/productbacklog/{productBacklogId}/userstory/save", method = RequestMethod.POST)
 	public String saveUserStory(@PathVariable("productBacklogId") int id,
 			@ModelAttribute("userstory") UserStory userStory,
 			BindingResult result, RedirectAttributes redir) {
@@ -68,15 +68,43 @@ public class UserStoryController {
 		ProductBacklog productBacklog = productBacklogService.getProductBacklogById(id);
 
 		userStory.setProductBacklog(productBacklog);
-		userStoryService.addUserStory(userStory);
-
-		redir.addFlashAttribute("message", "New user story added!!!");
+		
+		if(userStory.getId() == 0) {
+			userStoryService.addUserStory(userStory);
+		}
+		else {
+			userStoryService.updateUserStory(userStory);
+		}
+		
+		
 
 		/*
 		 * Note that there is no slash "/" right after "redirect:" So, it
 		 * redirects to the path relative to the current path
 		 */
 		return "redirect:/productbacklog/" + id;
+	}
+	
+
+	@RequestMapping(value = "productbacklog/{productBacklogId}/userstory/{userStoryId}/edit")
+	public String editUserStory(@PathVariable int userStoryId, @PathVariable int productBacklogId, Model model) {
+		ProductBacklog productBacklog = productBacklogService.getProductBacklogById(productBacklogId);
+		if(productBacklog.getUserStories().size() > 0) {
+			model.addAttribute("userStoryList", productBacklog.getUserStories());
+		}
+		if(productBacklog.getReleases().size() > 0) {
+			model.addAttribute("releaseBacklogList", productBacklog.getReleases());
+		}
+		
+		UserStory userStory = userStoryService.getUserStoryById(userStoryId);
+		Release releaseBacklog = new Release();
+		model.addAttribute("buttonTitle", "Edit");
+		model.addAttribute("userstory", userStory);
+		model.addAttribute("releasebacklog", releaseBacklog);
+		model.addAttribute("productbacklog", productBacklog);
+		model.addAttribute("page", "productBacklog/productBacklogDetails");
+
+		return "dashboard";
 	}
 	
 	@RequestMapping(value = "productbacklog/{productBacklogId}/userstory/{userStoryId}/delete")
@@ -89,7 +117,6 @@ public class UserStoryController {
 //			e.printStackTrace();
 //			return "error";
 //		}
-		
 		
 		this.userStoryService.removeUserStory(userStoryId);
 

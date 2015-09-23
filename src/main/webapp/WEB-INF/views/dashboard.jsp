@@ -2,6 +2,14 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ page session="false"%>
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+pageEncoding="ISO-8859-1" session="false"%>
+
+<%
+HttpSession session = request.getSession(false);
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,10 +49,15 @@
 <script src="<%=request.getContextPath()%>/resources/js/nprogress.js"></script>
 
 <!-- PNotify -->
-    <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/notify/pnotify.core.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/notify/pnotify.buttons.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/notify/pnotify.nonblock.js"></script>
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/resources/js/notify/pnotify.core.js"></script>
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/resources/js/notify/pnotify.buttons.js"></script>
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/resources/js/notify/pnotify.nonblock.js"></script>
 
+
+<%-- <c:url var="role" value='<%= session.getAttribute("role") %>'></c:url> --%>
 <!-- <script>
         NProgress.start();
     </script> -->
@@ -60,7 +73,6 @@
         <![endif]-->
 
 </head>
-
 
 <body class="nav-md">
 
@@ -104,45 +116,53 @@
 										<li><a href="<c:url value='/dashboard' />">Dashboard</a>
 										</li>
 									</ul></li>
-								<li><a><i class="fa fa-edit"></i> Employees <span
-										class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu" style="display: none">
-										<li><a href="<c:url value='/employee/' />">List
-												Employees</a></li>
-										<li><a href="<c:url value='/employee/add/' />">Add
-												Employees</a></li>
-									</ul></li>
+								<%-- <c:if test="${session.role == 'HR ADMIN'}"> --%>
+									<li><a><i class="fa fa-edit"></i> Employees <span
+											class="fa fa-chevron-down"></span></a>
+										<ul class="nav child_menu" style="display: none">
+											<li><a href="<c:url value='/employee/' />">List
+													Employees</a></li>
+											<li><a href="<c:url value='/employee/add/' />">Add
+													Employees</a></li>
+										</ul></li>
+								<%-- </c:if> --%>
+								<%-- <c:if test="${session.role == 'Product Owner'}"> --%>
+									<li><a><i class="fa fa-bar-chart-o"></i> Product<span
+											class="fa fa-chevron-down"></span></a>
+										<ul class="nav child_menu" style="display: none">
+											<li><a href="<c:url value='/productbacklog/' />">Product
+													Backlog</a></li>
 
-								<li><a><i class="fa fa-bar-chart-o"></i> Product<span
-										class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu" style="display: none">
-										<li><a href="<c:url value='/productbacklog/' />">Product
-												Backlog</a></li>
+										</ul></li>
+								<%-- </c:if> --%>
 
-									</ul></li>
-									
+								<%-- <c:if
+									test="${session.role == 'Product Owner' || session.role == 'Scrum Master'}"> --%>
 									<li><a><i class="fa fa-bar-chart-o"></i> Release<span
-										class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu" style="display: none">
-										<li><a href="<c:url value='/releasebacklog/' />">Release
-												Backlog</a></li>
+											class="fa fa-chevron-down"></span></a>
+										<ul class="nav child_menu" style="display: none">
+											<li><a href="<c:url value='/releasebacklog/' />">Release
+													Backlog</a></li>
 
-									</ul></li>
-									
+										</ul></li>
+
+								
 									<li><a><i class="fa fa-bar-chart-o"></i> Sprint<span
-										class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu" style="display: none">
-										<li><a href="<c:url value='/sprint/' />">Sprints</a></li>
+											class="fa fa-chevron-down"></span></a>
+										<ul class="nav child_menu" style="display: none">
+											<li><a href="<c:url value='/sprint/' />">Sprints</a></li>
 
-									</ul></li>
-
-
-								<li><a><i class="fa fa-bar-chart-o"></i> Charts<span
+										</ul></li>
+									
+									<li><a><i class="fa fa-bar-chart-o"></i> Charts<span
 										class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
 										<li><a href="chartjs.html">Burnt Down Chart</a></li>
 										<li><a href="other_charts.html">Other Charts </a></li>
 									</ul></li>
+								<%-- </c:if> --%>
+
+								
 							</ul>
 						</div>
 					</div>

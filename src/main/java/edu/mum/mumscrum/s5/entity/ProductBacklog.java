@@ -35,7 +35,7 @@ public class ProductBacklog {
 		return id;
 	}
 
-	@OneToMany(mappedBy = "productBacklog", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "productBacklog", fetch = FetchType.EAGER)
 	@Cascade({ CascadeType.ALL })
 	public Set<UserStory> getUserStories() {
 

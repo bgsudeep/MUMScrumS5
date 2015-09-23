@@ -61,15 +61,8 @@ public class UserStoryDAOImpl implements UserStoryDAO {
 	@Transactional
 	public void removeUserStory(int id) {
 		UserStory us = getUserStoryById(id);
-		us.setReleaseBacklog(null);
-		us.setProductBacklog(null);
-		us.setSprint(null);
-		
-		updateUserStory(us);
-		
-		if(null != us) {
-			entityManager.remove(us);
-		}
+		System.out.println(us.getId());
+		entityManager.remove(us);
 		LOGGER.info("UserStory deleted successfully, userStory details=" + us);
 	}
 

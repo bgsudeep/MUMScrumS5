@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.support.SessionStatus;
 
 import edu.mum.mumscrum.s5.entity.Employee;
 import edu.mum.mumscrum.s5.service.UserService;
@@ -44,10 +47,11 @@ public class LoginController {
 	@RequestMapping(value = { "/login" })
 	public String loginPage(Map<String, Object> map,
 			@RequestParam(value = "logout", required = false) String logout,
-			@RequestParam(value = "error", required = false) String error) {
+			@RequestParam(value = "error", required = false) String error, HttpSession session, SessionStatus status) {
 
 		if (logout != null) {
-
+			status.setComplete();
+			session.removeAttribute("role");
 			map.put("logoutSuccessful", "You've been logged out successfully.");
 		}
 
@@ -77,7 +81,7 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = { "/", "/dashboard**" }, method = RequestMethod.GET)
-	public String defaultPage(Map<String, Object> map) {
+	public String defaultPage(Map<String, Object> map, HttpSession session) {
 		
 		User activeUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         System.out.println("Currently logged in user is: " + activeUser.getUsername());
@@ -85,7 +89,7 @@ public class LoginController {
         edu.mum.mumscrum.s5.entity.User user = userService.getUserByUserName(activeUser.getUsername());
         
         map.put("loggedInEmployee", user.getEmployee());
-		map.put("page", "main");
+		
 		
 		
 		Collection<GrantedAuthority> authorities = getAuthorities();
@@ -93,37 +97,42 @@ public class LoginController {
          
         for (GrantedAuthority authority : authorities) {
             rolename = authority.getAuthority();
-            map.put("role", rolename);
+//            map.put("role", rolename);
+            session.setAttribute("role", rolename);
             if (rolename.equals("Developer")) {
                 LOGGER.debug("Directing to home page for: [" + rolename + "]");
-                
-                return "dashboard-tester";
+                Employee emp = user.getEmployee();
+                map.put("assignedUserStories", emp.getUserStoriesForDeveloper());
+                map.put("page", "main-developer");
+//                return "dashboard-tester";
             }
             if (rolename.equals("Tester")) {
             	Employee emp = user.getEmployee();
-            	System.out.println(emp.getUserStoriesForTester());
+            	map.put("assignedUserStories", emp.getUserStoriesForTester());
                 LOGGER.debug("Directing to home page for: [" + rolename + "]");
-                return "dashboard-tester";
+//                return "dashboard-tester";
+                map.put("page", "main-tester");
             }
             if (rolename.equals("Scrum Master")) {
                 LOGGER.debug("Directing to home page for: [" + rolename + "]");
-                return "dashboard-scrum";
+//                return "dashboard-scrum";
+                map.put("page", "main-scrum-master");
             }
             
             if (rolename.equals("Product Owner")) {
                 LOGGER.debug("Directing to home page for: [" + rolename + "]");
-                return "dashboard-product-owner";
+//                return "dashboard-product-owner";
+                map.put("page", "main-product-owner");
             }
             if (rolename.equals("HR ADMIN")) {
                 LOGGER.debug("Directing to home page for: [" + rolename + "]");
-                return "dashboard";
+//                return "dashboard";
+                map.put("page", "main-hr-admin");
             }
             
             
         }
-         
-        LOGGER.error("Role not found - directing to home page for ROLE_USER");
-        
+         System.out.println("ROLE IS: " + session.getAttribute("role"));
 		return "/dashboard";
 	}
 	

@@ -97,6 +97,7 @@ public class ProductBacklogController {
 		model.addAttribute("userstory", userStory);
 		model.addAttribute("releasebacklog", releaseBacklog);
 		model.addAttribute("productbacklog", productBacklog);
+		model.addAttribute("buttonTitle", "Add");
 		model.addAttribute("page", "productBacklog/productBacklogDetails");
 
 		return "dashboard";

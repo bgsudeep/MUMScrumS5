@@ -61,7 +61,7 @@
 		<div class="x_panel">
 			<div class="x_title">
 				<h2>
-					Add Sprint for <b>${releasebacklog.name}</b>
+					${buttonTitle} Sprint for Release: <b>${releasebacklog.name}</b>
 				</h2>
 
 				<div class="clearfix"></div>
@@ -104,7 +104,7 @@
 		<div class="x_panel">
 			<div class="x_title">
 				<h2>
-					Sprint List for <b>${releasebacklog.name }</b>
+					Sprint List for Release: <b>${releasebacklog.name }</b>
 				</h2>
 
 				<div class="clearfix"></div>
@@ -145,7 +145,7 @@
 				<div class="x_panel">
 					<div class="x_title">
 						<h2>
-							Available User Stories for release: <b>${releasebacklog.name }</b>
+							Available User Stories for Release: <b>${releasebacklog.name }</b>
 						</h2>
 
 						<div class="clearfix"></div>

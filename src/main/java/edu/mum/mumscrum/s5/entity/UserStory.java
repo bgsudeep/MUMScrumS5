@@ -50,6 +50,7 @@ public class UserStory {
 	private Date completedDate;
 	
 	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+//	@ManyToOne
 	@JoinColumn(name = "product_backlog_id", nullable = false)
 	private ProductBacklog productBacklog;
 
