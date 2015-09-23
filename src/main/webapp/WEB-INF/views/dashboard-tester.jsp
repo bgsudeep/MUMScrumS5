@@ -96,7 +96,7 @@
 						class="main_menu_side hidden-print main_menu">
 
 						<div class="menu_section">
-							<h3>General</h3>
+							<h3>${role}</h3>
 							<ul class="nav side-menu">
 								<li><a><i class="fa fa-home"></i> Home <span
 										class="fa fa-chevron-down"></span></a>
@@ -104,23 +104,7 @@
 										<li><a href="<c:url value='/dashboard' />">Dashboard</a>
 										</li>
 									</ul></li>
-								<li><a><i class="fa fa-edit"></i> Employees <span
-										class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu" style="display: none">
-										<li><a href="<c:url value='/employee/' />">List
-												Employees</a></li>
-										<li><a href="<c:url value='/employee/add/' />">Add
-												Employees</a></li>
-									</ul></li>
 
-								<li><a><i class="fa fa-bar-chart-o"></i> Product<span
-										class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu" style="display: none">
-										<li><a href="<c:url value='/productbacklog/' />">Product
-												Backlog</a></li>
-
-									</ul></li>
-									
 									<li><a><i class="fa fa-bar-chart-o"></i> Release<span
 										class="fa fa-chevron-down"></span></a>
 									<ul class="nav child_menu" style="display: none">
@@ -135,14 +119,7 @@
 										<li><a href="<c:url value='/sprint/' />">Sprints</a></li>
 
 									</ul></li>
-
-
-								<li><a><i class="fa fa-bar-chart-o"></i> Charts<span
-										class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu" style="display: none">
-										<li><a href="chartjs.html">Burnt Down Chart</a></li>
-										<li><a href="other_charts.html">Other Charts </a></li>
-									</ul></li>
+								
 							</ul>
 						</div>
 					</div>

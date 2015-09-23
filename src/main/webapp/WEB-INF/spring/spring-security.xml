@@ -6,7 +6,8 @@
            http://www.springframework.org/schema/security/spring-security.xsd">
 
 	<http auto-config="true" use-expressions="true">
-		<intercept-url pattern="/productbacklog/**" access="hasRole('Product Owner')" />
+		<!-- <intercept-url pattern="/productbacklog/**" access="hasRole('Product Owner')" />
+		<intercept-url pattern="/productbacklog/**/releasebacklog/**" access="hasRole('Scrum Master')" /> -->
 		<intercept-url pattern="/login*" access="isAnonymous()" />
 		<intercept-url pattern="/**" access="isAuthenticated()" />
 

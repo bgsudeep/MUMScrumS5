@@ -98,33 +98,36 @@
 											<%-- <button
 												formaction="/MUMScrumS5/productbacklog/${productbacklog.id}/releasebacklog/${releasebacklog.id}/sprint/${sprint.id}/userstory/add/${userstory.id}/"
 												type="submit">Add to Sprint</button> --%>
-												
-												
-												<div class="x_content">
 
-                                <ul class="nav nav-pills" role="tablist">
-                                    
-                                    <li role="presentation" class="dropdown">
-                                        <a id="drop4" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-                                Select
-                                <span class="caret"></span>
-                            </a>
-                                        <ul id="menu6" class="dropdown-menu animated fadeInDown" role="menu">
-                                            <li role="presentation" class="divider"></li>
-                                        
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" onclick="new PNotify({
+
+											<div class="x_content">
+
+												<ul class="nav nav-pills" role="tablist">
+
+													<li role="presentation" class="dropdown"><a id="drop4"
+														href="#" class="dropdown-toggle" data-toggle="dropdown"
+														aria-haspopup="true" role="button" aria-expanded="false">
+															Select <span class="caret"></span>
+													</a>
+														<ul id="menu6" class="dropdown-menu animated fadeInDown"
+															role="menu">
+															<li role="presentation" class="divider"></li>
+
+															<li role="presentation"><a role="menuitem"
+																tabindex="-1"
+																onclick="new PNotify({
                                 title: 'Success',
                                 text: 'Adding User Story to Sprint completed',
                                 type: 'success'
-                            });" href="/MUMScrumS5/productbacklog/${productbacklog.id}/releasebacklog/${releasebacklog.id}/sprint/${sprint.id}/userstory/add/${userstory.id}/">Add to Sprint</a>
-                                            </li>
-                                            <li role="presentation" class="divider"></li>
-                                        </ul>
-                                    </li>
-                                    
-                                </ul>
+                            });"
+																href="/MUMScrumS5/productbacklog/${productbacklog.id}/releasebacklog/${releasebacklog.id}/sprint/${sprint.id}/userstory/add/${userstory.id}/">Add
+																	to Sprint</a></li>
+															<li role="presentation" class="divider"></li>
+														</ul></li>
 
-                            </div>
+												</ul>
+
+											</div>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -180,66 +183,83 @@
 										<button
 											formaction="/MUMScrumS5/productbacklog/${productbacklog.id}/releasebacklog/${releasebacklog.id}/sprint/${sprint.id}/userstory/remove/${userstory.id}/"
 											type="submit">Assign Tester</button>  --%>
-											
-											
-											
-											<div class="x_content">
 
-                                <ul class="nav nav-pills" role="tablist">
-                                    
-                                    <li role="presentation" class="dropdown">
-                                        <a id="drop4" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-                                Select
-                                <span class="caret"></span>
-                            </a>
-                                        <ul id="menu6" class="dropdown-menu animated fadeInDown" role="menu">
-                                            <li role="presentation" class="divider"></li>
-                                        
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" onclick="new PNotify({
+
+
+										<div class="x_content">
+
+											<ul class="nav nav-pills" role="tablist">
+
+												<li role="presentation" class="dropdown"><a id="drop4"
+													href="#" class="dropdown-toggle" data-toggle="dropdown"
+													aria-haspopup="true" role="button" aria-expanded="false">
+														Select <span class="caret"></span>
+												</a>
+													<ul id="menu6" class="dropdown-menu animated fadeInDown"
+														role="menu">
+														<li role="presentation" class="divider"></li>
+
+														<li role="presentation"><a role="menuitem"
+															tabindex="-1"
+															onclick="new PNotify({
                                 title: 'Success',
                                 text: 'Removing User Story from Sprint completed',
                                 type: 'success'
-                            });" href="/MUMScrumS5/productbacklog/${productbacklog.id}/releasebacklog/${releasebacklog.id}/sprint/${sprint.id}/userstory/remove/${userstory.id}/">Remove from Sprint</a>
-                                            </li>
-                                            <li role="presentation" class="divider"></li>
-                                            
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="/MUMScrumS5/productbacklog/${productbacklog.id}/releasebacklog/${releasebacklog.id}/sprint/${sprint.id}/userstory/${userstory.id}/assign/developer">Assign Developer</a>
-                                            </li>
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="/MUMScrumS5/productbacklog/${productbacklog.id}/releasebacklog/${releasebacklog.id}/sprint/${sprint.id}/userstory/${userstory.id}/assign/tester">Assign Tester</a>
-                                            </li>
-                                            <li role="presentation" class="divider"></li>
-                                            <li role="presentation"> <a data-toggle="modal" data-target=".bs-example-modal-lg">Large Modal</a>
-                                            </li>
-                                            
-                                        </ul>
-                                    </li>
-                                    
-                                </ul>
-                                
-                                <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
+                            });"
+															href="/MUMScrumS5/productbacklog/${productbacklog.id}/releasebacklog/${releasebacklog.id}/sprint/${sprint.id}/userstory/remove/${userstory.id}/">Remove
+																from Sprint</a></li>
+														<li role="presentation" class="divider"></li>
 
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                                                </button>
-                                                <h4 class="modal-title" id="myModalLabel">Assign Developer</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <h4>Text in a modal</h4>
-                                                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                                                <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
-                                            </div>
+														<li role="presentation"><a role="menuitem"
+															tabindex="-1"
+															href="/MUMScrumS5/productbacklog/${productbacklog.id}/releasebacklog/${releasebacklog.id}/sprint/${sprint.id}/userstory/${userstory.id}/assign/developer">Assign
+																Developer</a></li>
+														<li role="presentation"><a role="menuitem"
+															tabindex="-1"
+															href="/MUMScrumS5/productbacklog/${productbacklog.id}/releasebacklog/${releasebacklog.id}/sprint/${sprint.id}/userstory/${userstory.id}/assign/tester">Assign
+																Tester</a></li>
+														<li role="presentation" class="divider"></li>
+														<li role="presentation"><a data-toggle="modal"
+															data-target=".bs-example-modal-lg">Large Modal</a></li>
 
-                                        </div>
-                                    </div>
-                                </div>
+													</ul></li>
 
-                            </div>
+											</ul>
+
+											<div class="modal fade bs-example-modal-lg" tabindex="-1"
+												role="dialog" aria-hidden="true">
+												<div class="modal-dialog modal-lg">
+													<div class="modal-content">
+
+														<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal">
+																<span aria-hidden="true">×</span>
+															</button>
+															<h4 class="modal-title" id="myModalLabel">Assign
+																Developer</h4>
+														</div>
+														<div class="modal-body">
+															<h4>Text in a modal</h4>
+															<p>Praesent commodo cursus magna, vel scelerisque
+																nisl consectetur et. Vivamus sagittis lacus vel augue
+																laoreet rutrum faucibus dolor auctor.</p>
+															<p>Aenean lacinia bibendum nulla sed consectetur.
+																Praesent commodo cursus magna, vel scelerisque nisl
+																consectetur et. Donec sed odio dui. Donec ullamcorper
+																nulla non metus auctor fringilla.</p>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-default"
+																data-dismiss="modal">Close</button>
+															<button type="button" class="btn btn-primary">Save
+																changes</button>
+														</div>
+
+													</div>
+												</div>
+											</div>
+
+										</div>
 
 									</td>
 								</tr>
