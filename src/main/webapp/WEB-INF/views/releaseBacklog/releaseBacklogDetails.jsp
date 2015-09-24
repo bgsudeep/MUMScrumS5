@@ -123,7 +123,7 @@
 						<c:forEach items="${sprintList}" var="sprint">
 							<tr>
 								<td><a
-									href="/MUMScrumS5/productbacklog/${sprint.id}/details"><c:out
+									href="/MUMScrumS5/productbacklog/${productbacklog.id}/releasebacklog/${releasebacklog.id}/sprint/${sprint.id}"><c:out
 											value="${sprint.title}" /></a></td>
 								<td>${sprint.description}</td>
 
@@ -155,7 +155,6 @@
 						<table class="table table-striped">
 							<thead>
 								<tr>
-									<th>S.N.</th>
 									<th>Title</th>
 									<th>Description</th>
 									<th>Est. Dev. Hours</th>
@@ -168,10 +167,7 @@
 							<tbody>
 								<c:forEach items="${availableUserStories}" var="userstory">
 									<tr>
-										<td>${userstory.id}</td>
-										<td><a
-											href="/MUMScrumS5/productbacklog/${userstory.id}/details"><c:out
-													value="${userstory.title}" /></a></td>
+										<td>${userstory.title}</td>
 										<td>${userstory.description}</td>
 										<td>${userstory.estimatedDevHours}</td>
 										<td>${userstory.remainingDevHours}</td>
@@ -206,7 +202,6 @@
 					<table class="table table-striped">
 						<thead>
 							<tr>
-								<th>S.N.</th>
 								<th>Title</th>
 								<th>Description</th>
 								<th>Est. Dev. Hours</th>
@@ -219,7 +214,6 @@
 						<tbody>
 							<c:forEach items="${userStoryList}" var="userstory">
 								<tr>
-									<td>${userstory.id}</td>
 									<td><a
 										href="/MUMScrumS5/productbacklog/${userstory.id}/details"><c:out
 												value="${userstory.title}" /></a></td>

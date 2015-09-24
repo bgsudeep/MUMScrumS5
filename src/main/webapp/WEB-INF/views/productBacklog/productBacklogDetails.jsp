@@ -53,9 +53,9 @@
 		<div class="x_panel">
 			<div class="x_title">
 				<h2>
-					<i class="fa fa-align-left"></i> User Story <small>Sessions</small>
+					<i class="fa fa-align-left"></i> User Story
 				</h2>
-				<ul class="nav navbar-right panel_toolbox">
+				<ul class="nav navbar-right">
 					<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
 					</li>
 
@@ -76,7 +76,7 @@
 								User Story for <b>${productbacklog.title }
 							</h4>
 						</a>
-						<div id="collapseOne" class="panel-collapse collapse"
+						<div id="collapseOne" class="panel-collapse collapse <c:if test="${buttonTitle == 'Edit' }">in</c:if>"
 							role="tabpanel" aria-labelledby="headingOne">
 							<div class="panel-body">
 								<form:form
@@ -206,7 +206,7 @@
 				<h2>
 					<i class="fa fa-align-left"></i> Release
 				</h2>
-				<ul class="nav navbar-right panel_toolbox">
+				<ul class="nav navbar-right">
 					<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
 					</li>
 
@@ -286,7 +286,7 @@
 						<div id="collapseFour" class="panel-collapse collapse in"
 							role="tabpanel" aria-labelledby="headingFour">
 							<div class="panel-body">
-								<table class="table table-striped">
+								<table class="table table-striped jambo_table">
 					<thead>
 						<tr>
 							<th>Title</th>
@@ -300,7 +300,7 @@
 						<c:forEach items="${releaseBacklogList}" var="releaseBacklog">
 							<tr>
 								<td><a
-									href="/MUMScrumS5/productbacklog/${releaseBacklog.id}/details"><c:out
+									href="/MUMScrumS5/productbacklog/${productbacklog.id}/releasebacklog/${releaseBacklog.id}"><c:out
 											value="${releaseBacklog.name}" /></a></td>
 								<td>${releaseBacklog.description}</td>
 								<td>${releaseBacklog.startDate}</td>

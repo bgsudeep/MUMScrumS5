@@ -56,7 +56,6 @@ public class UserStoryController {
 
 	@RequestMapping(value = "/userstory", method = RequestMethod.GET)
 	public String listUserStories(Model model) {
-		
 		return "dashboard";
 	}
 	
@@ -76,12 +75,6 @@ public class UserStoryController {
 			userStoryService.updateUserStory(userStory);
 		}
 		
-		
-
-		/*
-		 * Note that there is no slash "/" right after "redirect:" So, it
-		 * redirects to the path relative to the current path
-		 */
 		return "redirect:/productbacklog/" + id;
 	}
 	

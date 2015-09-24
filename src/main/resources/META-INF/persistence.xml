@@ -13,6 +13,8 @@
         <class>edu.mum.mumscrum.s5.entity.Release</class>
         <class>edu.mum.mumscrum.s5.entity.Sprint</class>
         <class>edu.mum.mumscrum.s5.entity.Burndown</class>
+        <class>edu.mum.mumscrum.s5.entity.WorkLog</class>
+        
         
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 	</persistence-unit>
