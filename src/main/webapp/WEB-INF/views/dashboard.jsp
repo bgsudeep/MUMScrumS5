@@ -91,8 +91,9 @@
 					<!-- menu prile quick info -->
 					<div class="profile">
 						<div class="profile_pic">
+						<a href = "<c:url value = '/employee/employeeprofile/' />" >
 							<img src="<%=request.getContextPath()%>/resources/images/img.jpg"
-								alt="..." class="img-circle profile_img">
+								alt="..." class="img-circle profile_img"></a>
 						</div>
 						<div class="profile_info">
 							<span>Welcome, ${loggedInEmployee.firstName}</span>
@@ -146,7 +147,7 @@
 
 										</ul></li>
 
-								
+
 									<li><a><i class="fa fa-tasks"></i> Sprint<span
 											class="fa fa-chevron-down"></span></a>
 										<ul class="nav child_menu" style="display: none">
@@ -155,7 +156,7 @@
 										</ul></li>
 								</c:if>
 
-								
+
 							</ul>
 						</div>
 					</div>

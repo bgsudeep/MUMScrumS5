@@ -1,9 +1,10 @@
 package edu.mum.mumscrum.s5.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -57,14 +58,6 @@ public class EmployeeController {
 	@RequestMapping(value= "/add", method = RequestMethod.POST)
 	public String addEmployee(@ModelAttribute("employee") Employee e){
 		LOGGER.debug("Processing request for /employee/add");
-		
-		
-		
-		
-//		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//		String encodedPassword = encoder.encode(e.getUser().getPassword());
-//		
-//		e.getUser().setPassword(encodedPassword);
 		
 		if(e.getId() == 0){
 			//new employee, add it
@@ -132,9 +125,16 @@ public class EmployeeController {
 		}
 		
 		model.addAttribute("roles", roleService.getRoles());
-		model.addAttribute("page", "employee/addemployee");
-//        model.addAttribute("listPersons", this.employeeService.listEmployee());
+		model.addAttribute("page", "employee/editemployee");
         return "dashboard";
+    }
+    
+    @RequestMapping(value = "/employeeprofile", method = RequestMethod.GET)
+    public String employeeProfile(Model model, HttpSession session) {
+    	Employee emp = (Employee) session.getAttribute("loggedInEmployee");
+    	model.addAttribute("empName", emp);
+    	model.addAttribute("page", "employee/employeeprofile");
+    	return "dashboard";
     }
     
     public EmployeeService getEmployeeService() {

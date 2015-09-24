@@ -106,7 +106,7 @@ public class ReleaseBacklogController {
 	public String assignReleaseBacklog(@PathVariable int releaseBacklogId, Model model) {
 		Release releaseBacklog = releaseBacklogService.getReleaseById(releaseBacklogId);
 		List<User> scrumMasters = new ArrayList<User>();
-		scrumMasters.clear();
+
 		for (Role role : roleService.getRoles()) {
 			if(role.getRole().equals("Scrum Master")) {
 				for (User user : role.getUserRoles()) {
@@ -114,6 +114,7 @@ public class ReleaseBacklogController {
 				}
 			}
 		}
+		
 		model.addAttribute("scrummasters", scrumMasters);
 		model.addAttribute("releasebacklog", releaseBacklog);
 		model.addAttribute("page", "releaseBacklog/assignReleaseBacklog");

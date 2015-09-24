@@ -57,9 +57,6 @@ public class LoginController {
 			request.removeAttribute("role", WebRequest.SCOPE_SESSION);
 			request.removeAttribute("loggedInEmployee", WebRequest.SCOPE_SESSION);
 			
-//			session.removeAttribute("role");
-//			session.removeAttribute("loggedInEmployee");
-
 			map.put("logoutSuccessful", "You've been logged out successfully.");
 		}
 
@@ -97,8 +94,6 @@ public class LoginController {
         edu.mum.mumscrum.s5.entity.User user = userService.getUserByUserName(activeUser.getUsername());
         
         map.put("loggedInEmployee", user.getEmployee());
-		
-		
 		
 		Collection<GrantedAuthority> authorities = getAuthorities();
         String rolename;
