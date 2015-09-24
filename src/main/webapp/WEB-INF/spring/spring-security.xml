@@ -6,8 +6,10 @@
            http://www.springframework.org/schema/security/spring-security.xsd">
 
 	<http auto-config="true" use-expressions="true">
-		<!-- <intercept-url pattern="/productbacklog/**" access="hasRole('Product Owner')" /> -->
-		<!-- <intercept-url pattern="/productbacklog/**/releasebacklog/**" access="hasRole('Scrum Master')" /> -->
+		<intercept-url pattern="/employee/**" access="hasRole('HR ADMIN')" />
+		<intercept-url pattern="/productbacklog/" access="hasRole('Product Owner')" />
+		<intercept-url pattern="/productbacklog/**" access="hasRole('Scrum Master')" />
+		
 		<intercept-url pattern="/login*" access="isAnonymous()" />
 		<intercept-url pattern="/**" access="isAuthenticated()" />
 
@@ -16,7 +18,7 @@
 			password-parameter="password" />
 			
 		<logout logout-success-url="/login?logout" logout-url="/logout" />
-
+		<session-management invalid-session-url="/"></session-management>
 		<!-- access denied page -->
 		<access-denied-handler error-page="/403" />
 

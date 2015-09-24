@@ -1,14 +1,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ page session="false"%>
+<%@ page session="true"%>
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1" session="false"%>
 
-<%
-HttpSession session = request.getSession(false);
-%>
+
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -108,7 +108,7 @@ HttpSession session = request.getSession(false);
 						class="main_menu_side hidden-print main_menu">
 
 						<div class="menu_section">
-							<h3>General</h3>
+							<h3>${sessionScope.role}</h3>
 							<ul class="nav side-menu">
 								<li><a><i class="fa fa-home"></i> Home <span
 										class="fa fa-chevron-down"></span></a>
@@ -116,8 +116,8 @@ HttpSession session = request.getSession(false);
 										<li><a href="<c:url value='/dashboard' />">Dashboard</a>
 										</li>
 									</ul></li>
-								<%-- <c:if test="${session.role == 'HR ADMIN'}"> --%>
-									<li><a><i class="fa fa-edit"></i> Employees <span
+								<c:if test="${sessionScope.role == 'HR ADMIN'}">
+									<li><a><i class="fa fa-users"></i> Employees <span
 											class="fa fa-chevron-down"></span></a>
 										<ul class="nav child_menu" style="display: none">
 											<li><a href="<c:url value='/employee/' />">List
@@ -125,20 +125,20 @@ HttpSession session = request.getSession(false);
 											<li><a href="<c:url value='/employee/add/' />">Add
 													Employees</a></li>
 										</ul></li>
-								<%-- </c:if> --%>
-								<%-- <c:if test="${session.role == 'Product Owner'}"> --%>
-									<li><a><i class="fa fa-bar-chart-o"></i> Product<span
+								</c:if>
+								<c:if test="${sessionScope.role == 'Product Owner'}">
+									<li><a><i class="fa fa-desktop"></i> Product<span
 											class="fa fa-chevron-down"></span></a>
 										<ul class="nav child_menu" style="display: none">
 											<li><a href="<c:url value='/productbacklog/' />">Product
 													Backlog</a></li>
 
 										</ul></li>
-								<%-- </c:if> --%>
+								</c:if>
 
-								<%-- <c:if
-									test="${session.role == 'Product Owner' || session.role == 'Scrum Master'}"> --%>
-									<li><a><i class="fa fa-bar-chart-o"></i> Release<span
+								<c:if
+									test="${sessionScope.role == 'Product Owner' || sessionScope.role == 'Scrum Master'}">
+									<li><a><i class="fa fa-bars"></i> Release<span
 											class="fa fa-chevron-down"></span></a>
 										<ul class="nav child_menu" style="display: none">
 											<li><a href="<c:url value='/releasebacklog/' />">Release
@@ -147,20 +147,13 @@ HttpSession session = request.getSession(false);
 										</ul></li>
 
 								
-									<li><a><i class="fa fa-bar-chart-o"></i> Sprint<span
+									<li><a><i class="fa fa-tasks"></i> Sprint<span
 											class="fa fa-chevron-down"></span></a>
 										<ul class="nav child_menu" style="display: none">
 											<li><a href="<c:url value='/sprint/' />">Sprints</a></li>
 
 										</ul></li>
-									
-									<li><a><i class="fa fa-bar-chart-o"></i> Charts<span
-										class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu" style="display: none">
-										<li><a href="chartjs.html">Burnt Down Chart</a></li>
-										<li><a href="other_charts.html">Other Charts </a></li>
-									</ul></li>
-								<%-- </c:if> --%>
+								</c:if>
 
 								
 							</ul>

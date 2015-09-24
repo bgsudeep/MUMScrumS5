@@ -19,12 +19,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.context.request.WebRequest;
 
 import edu.mum.mumscrum.s5.entity.Employee;
 import edu.mum.mumscrum.s5.service.UserService;
 
-
+@SessionAttributes({"role", "loggedInEmployee"})
 @Controller
 public class LoginController {
 	
@@ -47,11 +49,17 @@ public class LoginController {
 	@RequestMapping(value = { "/login" })
 	public String loginPage(Map<String, Object> map,
 			@RequestParam(value = "logout", required = false) String logout,
-			@RequestParam(value = "error", required = false) String error, HttpSession session, SessionStatus status) {
+			@RequestParam(value = "error", required = false) String error, WebRequest request, HttpSession session, SessionStatus status) {
 
 		if (logout != null) {
+			
 			status.setComplete();
-			session.removeAttribute("role");
+			request.removeAttribute("role", WebRequest.SCOPE_SESSION);
+			request.removeAttribute("loggedInEmployee", WebRequest.SCOPE_SESSION);
+			
+//			session.removeAttribute("role");
+//			session.removeAttribute("loggedInEmployee");
+
 			map.put("logoutSuccessful", "You've been logged out successfully.");
 		}
 
@@ -97,39 +105,33 @@ public class LoginController {
          
         for (GrantedAuthority authority : authorities) {
             rolename = authority.getAuthority();
-//            map.put("role", rolename);
             session.setAttribute("role", rolename);
+            session.setAttribute("loggedInEmployee", user.getEmployee());
             if (rolename.equals("Developer")) {
                 LOGGER.debug("Directing to home page for: [" + rolename + "]");
                 Employee emp = user.getEmployee();
                 map.put("assignedUserStories", emp.getUserStoriesForDeveloper());
                 map.put("page", "main-developer");
-//                return "dashboard-tester";
             }
             if (rolename.equals("Tester")) {
             	Employee emp = user.getEmployee();
             	map.put("assignedUserStories", emp.getUserStoriesForTester());
                 LOGGER.debug("Directing to home page for: [" + rolename + "]");
-//                return "dashboard-tester";
                 map.put("page", "main-tester");
             }
             if (rolename.equals("Scrum Master")) {
                 LOGGER.debug("Directing to home page for: [" + rolename + "]");
-//                return "dashboard-scrum";
                 map.put("page", "main-scrum-master");
             }
             
             if (rolename.equals("Product Owner")) {
                 LOGGER.debug("Directing to home page for: [" + rolename + "]");
-//                return "dashboard-product-owner";
                 map.put("page", "main-product-owner");
             }
             if (rolename.equals("HR ADMIN")) {
                 LOGGER.debug("Directing to home page for: [" + rolename + "]");
-//                return "dashboard";
                 map.put("page", "main-hr-admin");
             }
-            
             
         }
          System.out.println("ROLE IS: " + session.getAttribute("role"));
