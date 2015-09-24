@@ -171,9 +171,7 @@
 									<tbody>
 										<c:forEach items="${userStoryList}" var="userstory">
 											<tr>
-												<td><a
-													href="/MUMScrumS5/productbacklog/${userstory.id}/details"><c:out
-															value="${userstory.title}" /></a></td>
+												<td>${userstory.title}</td>
 												<td>${userstory.description}</td>
 												<td>${userstory.estimatedDevHours}</td>
 												<td>${userstory.remainingDevHours}</td>

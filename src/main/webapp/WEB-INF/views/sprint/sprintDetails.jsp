@@ -219,8 +219,8 @@
 															href="/MUMScrumS5/productbacklog/${productbacklog.id}/releasebacklog/${releasebacklog.id}/sprint/${sprint.id}/userstory/${userstory.id}/assign/tester">Assign
 																Tester</a></li>
 														<li role="presentation" class="divider"></li>
-														<li role="presentation"><a data-toggle="modal"
-															data-target=".bs-example-modal-lg">Large Modal</a></li>
+														<!-- <li role="presentation"><a data-toggle="modal"
+															data-target=".bs-example-modal-lg">Large Modal</a></li> -->
 
 													</ul></li>
 

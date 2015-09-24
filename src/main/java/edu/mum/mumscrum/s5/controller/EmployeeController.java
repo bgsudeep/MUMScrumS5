@@ -39,7 +39,6 @@ public class EmployeeController {
 		return "dashboard";
 	}
 	
-	@PreAuthorize("hasRole('HR ADMIN')")
 	@RequestMapping(value="/add", method=RequestMethod.GET)
 	public String addEmp(Model model) {
 		LOGGER.debug("Processing request for /employee/add GET");
